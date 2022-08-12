@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { PokemonService} from "../../services/pokemon.service";
+import {HttpClient} from "@angular/common/http";
+
+
+
 
 @Component({
   selector: 'app-pokemon-search',
@@ -7,9 +12,26 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PokemonSearchComponent implements OnInit {
 
-  constructor() { }
+  constructor(public pokemonService: PokemonService, public http: HttpClient,) { }
+public pokemonApi: any = [];
+public allPokemonList: any = [];
+public pokemon:  any = [];
 
-  ngOnInit(): void {
+
+  async ngOnInit() {
+    this.pokemonApi = await this.pokemonService.getPokemon()
+    this.allPokemonList = await this.pokemonApi.results
+
+    const pokemonCompleteList = async (): Promise<any> => {
+      Promise.all(
+        this.allPokemonList.map(async (pokemon: any): Promise<any> => {
+          const aPokemon = await this.http.get(`https://pokeapi.co/api/v2/pokemon/${pokemon.name}`).toPromise()
+          this.pokemon.push(aPokemon)
+        })
+      )
+
+
+    }
+    await pokemonCompleteList()
   }
-
 }
