@@ -5,3 +5,64 @@ img {
 .body {
   background-color: red;
 }
+.fire {
+  background-color: red;
+  color: whitesmoke;
+}
+.grass {
+  background-color: green;
+  color: whitesmoke;
+}
+.water {
+  background-color: steelblue;
+  color: whitesmoke;
+}
+.poison {
+  background-color: mediumvioletred;
+  color: whitesmoke;
+}
+.ground {
+  background-color: chocolate;
+}
+.ghost {
+  background-color: #5E6472;
+  color: whitesmoke;
+}
+.electric {
+  background-color: yellow;
+}
+.psychic {
+  background: linear-gradient(217deg, rgba(255,0,0,.8), rgba(255,0,0,0) 70.71%),
+  linear-gradient(127deg, rgba(0,255,0,.8), rgba(0,255,0,0) 70.71%),
+  linear-gradient(336deg, rgba(0,0,255,.8), rgba(0,0,255,0) 70.71%);
+
+  color: whitesmoke;
+}
+.rock {
+  background-color: darkgrey;
+}
+.bug {
+  background-color: forestgreen;
+  color: whitesmoke;
+}
+.fighting {
+  background-color: darkred;
+  color: whitesmoke;
+}
+.normal {
+  background-color: #FAF3DD;
+  color: black;
+}
+.fairy {
+  background-color: lightpink;
+}
+.ice {
+  background-color: deepskyblue;
+}
+
+div {
+  border: 1px solid red;
+}
+td, tr {
+  border: 1px solid green;
+}

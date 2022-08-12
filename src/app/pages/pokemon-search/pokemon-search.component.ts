@@ -18,20 +18,21 @@ public allPokemonList: any = [];
 public pokemon:  any = [];
 
 
+
   async ngOnInit() {
     this.pokemonApi = await this.pokemonService.getPokemon()
     this.allPokemonList = await this.pokemonApi.results
-
+    let listObjects: any = [];
     const pokemonCompleteList = async (): Promise<any> => {
-      Promise.all(
+      await Promise.all(
         this.allPokemonList.map(async (pokemon: any): Promise<any> => {
           const aPokemon = await this.http.get(`https://pokeapi.co/api/v2/pokemon/${pokemon.name}`).toPromise()
           this.pokemon.push(aPokemon)
         })
       )
-
-
+      return listObjects;
     }
     await pokemonCompleteList()
+    console.log(this.pokemon)
   }
 }
