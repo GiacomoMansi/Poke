@@ -8,12 +8,13 @@
   <!--  Search Bar-->
     <div class="col-3">
       <input class="form-control" type="text" name="search" [(ngModel)]="item.name" placeholder="Search..." >
+      <button (click)="sort('name')">Name</button>
     </div>
   </div>
 </div>
 <div class="col-12 mt-5">
   <div class="row justify-content-center">
-    <div *ngFor="let item of this.pokemon |filter:item.name" class="card m-2 align-items-center bg-25 {{item.types[0].type.name}}" style="width: 18rem;">
+    <div *ngFor="let item of this.pokemon|filter:item.name|orderBy: key: reverse " class="card m-2 align-items-center bg-25 {{item.types[0].type.name}}" style="width: 18rem;">
       <div class="image-container">
         <img src="{{item.sprites.other.home.front_default}}" class="card-img-top">
       </div>
@@ -31,7 +32,7 @@
               </div>
 
               <table class="col-12">
-                <tr *ngFor="let item2 of item.stats">{{item2.stat.name}}
+                <tr *ngFor="let item2 of item.stats">{{item2.stat.name|orderBy: key: reverse}}
                   <td>
                     {{item2.base_stat}}
                   </td>

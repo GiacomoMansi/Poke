@@ -5,11 +5,15 @@ import { AppComponent } from './app.component';
 import { PokemonSearchComponent } from './pages/pokemon-cards/pokemon-cards.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { Ng2SearchPipeModule } from 'ng2-search-filter'
+import {Ng2OrderModule} from "ng2-order-pipe";
 import { FormsModule } from '@angular/forms';
+import { SortPipe } from './pipes/sort.pipe';
+
 @NgModule({
   declarations: [
     AppComponent,
-    PokemonSearchComponent
+    PokemonSearchComponent,
+    SortPipe,
   ],
   imports: [
     BrowserModule,
@@ -17,6 +21,7 @@ import { FormsModule } from '@angular/forms';
     NgbModule,
     Ng2SearchPipeModule,
     FormsModule,
+    Ng2OrderModule
   ],
   providers: [],
   bootstrap: [AppComponent]

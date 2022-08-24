@@ -17,6 +17,8 @@ public allPokemonList: any = [];
 public pokemon:  any = [];
 public selectBasicLoading = false;
 public item: any = []
+public hp: any;
+
 
 
   async ngOnInit() {
@@ -32,7 +34,16 @@ public item: any = []
       )
     }
     await pokemonCompleteList()
-    console.log(this.pokemon)
+    console.log(this.pokemon[0].types[0].type.name)
   }
 
+  //Sort by name
+  key = " ";
+  reverse: boolean = false;
+  sort(key: any) {
+  this.key = key
+    this.reverse = !this.reverse
+    console.log(this.pokemon)
+  }
 }
+
