@@ -6,9 +6,9 @@ import {HttpClient} from "@angular/common/http";
 
 
 @Component({
-  selector: 'app-pokemon-search',
-  templateUrl: './pokemon-search.component.html',
-  styleUrls: ['./pokemon-search.component.css']
+  selector: 'app-pokemon-cards',
+  templateUrl: './pokemon-cards.html',
+  styleUrls: ['./pokemon-cards.component.css']
 })
 export class PokemonSearchComponent implements OnInit {
 constructor(public pokemonService: PokemonService, public http: HttpClient,) { }
