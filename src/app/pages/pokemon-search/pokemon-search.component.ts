@@ -11,13 +11,12 @@ import {HttpClient} from "@angular/common/http";
   styleUrls: ['./pokemon-search.component.css']
 })
 export class PokemonSearchComponent implements OnInit {
-
-  constructor(public pokemonService: PokemonService, public http: HttpClient,) { }
+constructor(public pokemonService: PokemonService, public http: HttpClient,) { }
 public pokemonApi: any = [];
 public allPokemonList: any = [];
 public pokemon:  any = [];
 
-
+// TODO: Commentare tutto
 
   async ngOnInit() {
     this.pokemonApi = await this.pokemonService.getPokemon()

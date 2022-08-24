@@ -1,4 +1,4 @@
-
+<input>
 <div class="col-12 mt-5">
   <div class="row justify-content-center">
     <div *ngFor="let item of this.pokemon" class="card m-2 align-items-center bg-25 {{item.types[0].type.name}}" style="width: 18rem;">
@@ -11,7 +11,7 @@
             <div class="col-12 mt-3">
               <div class="row">
                 <div class="col-6">
-                  <p>Caratteristiche:</p>
+                  <p>Pokemon Info::</p>
                 </div>
                 <div class="col-6 text-end">
                   <p>tipo <br>{{ item.types[0].type.name}} </p>
@@ -29,15 +29,3 @@
     </div>
   </div>
 </div>
-
-
-<!--<div class="col-12 mt-5">
-  <div class="row justify-content-center">
-    <div *ngFor="let item of this.pokemon" class="card m-2 align-items-center bg-25" style="width: 18rem;">
-      <img src="{{item.sprites.other.home.front_default}}" class="card-img-top">
-      <div class="card-body">
-        <h5 class="card-title text-center">{{item.name}}</h5>
-      </div>
-    </div>
-  </div>
-</div>-->
