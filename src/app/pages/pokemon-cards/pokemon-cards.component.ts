@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {PokemonService} from "../../services/pokemon.service";
 import {HttpClient} from "@angular/common/http";
 
@@ -41,6 +41,16 @@ export class PokemonSearchComponent implements OnInit {
       )
     }
     await pokemonCompleteList()
+    console.log(this.pokemon)
+  }
+
+  //Search Input by Pokemon Name or Pokemon Type
+  searchText: string = "";
+  @Output()
+  searchTextChanged: EventEmitter<string> = new EventEmitter<string>()
+
+  onSearchTextChanged() {
+    this.searchTextChanged.emit(this.searchText)
   }
 
   //Sort by typo and stats
@@ -52,5 +62,6 @@ export class PokemonSearchComponent implements OnInit {
     this.reverse = !this.reverse
 
   }
+
 }
 
