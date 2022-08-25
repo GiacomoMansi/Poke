@@ -16,5 +16,4 @@ export class PokemonService {
   async getPokemon() {
     return this.http.get("https://pokeapi.co/api/v2/pokemon/?offset=0&limit=145").toPromise();
   }
-
 }

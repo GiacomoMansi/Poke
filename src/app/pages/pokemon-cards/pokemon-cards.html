@@ -1,14 +1,16 @@
-<div class="col-12">
+<div class="col-12 mt-3">
   <div class="row">
-    <div class="col-2 justify-content-end">
-      <select>
-        <option value="All">All</option>
-      </select>
-    </div>
   <!--  Search Bar-->
-    <div class="col-3">
+    <div class="col-12 d-flex justify-content-start">
       <input class="form-control" type="text" name="search" [(ngModel)]="item.name" placeholder="Search..." >
-      <button (click)="sort('name')">Name</button>
+      <button class="btn btn-info" (click)="sort('name')">Name</button>
+      <button class="btn btn-info" (click)="sort('typo')">Type</button>
+      <button class="btn btn-info" (click)="sort('hp')">Hp</button>
+      <button class="btn btn-info" (click)="sort('attack')">Attack</button>
+      <button class="btn btn-info" (click)="sort('defense')">Defense</button>
+      <button class="btn btn-info" (click)="sort('specialAttack')">Special Attack</button>
+      <button class="btn btn-info" (click)="sort('specialDefense')">Special Defense</button>
+      <button class="btn btn-info" (click)="sort('speed')">Speed</button>
     </div>
   </div>
 </div>
