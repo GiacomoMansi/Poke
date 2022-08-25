@@ -41,7 +41,7 @@ export class PokemonSearchComponent implements OnInit {
       )
     }
     await pokemonCompleteList()
-    console.log(this.pokemon)
+
   }
 
   //Search Input by Pokemon Name or Pokemon Type
@@ -51,6 +51,7 @@ export class PokemonSearchComponent implements OnInit {
 
   onSearchTextChanged() {
     this.searchTextChanged.emit(this.searchText)
+    console.log(this.pokemon)
   }
 
   //Sort by typo and stats
@@ -62,6 +63,8 @@ export class PokemonSearchComponent implements OnInit {
     this.reverse = !this.reverse
 
   }
+  p: number = 1;
+  collection: any[] = this.pokemon.length
 
 }
 

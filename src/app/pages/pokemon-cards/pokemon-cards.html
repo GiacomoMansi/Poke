@@ -39,7 +39,7 @@
       <!-------------------------------------------Pokemon Card------------------------------------------>
       <div class="container">
         <div class="row d-flex  justify-content-center m-auto">
-          <ng-container *ngFor="let item of this.pokemon|orderBy: key: reverse">
+          <ng-container *ngFor="let item of this.pokemon|orderBy: key: reverse|paginate: { itemsPerPage: 30, currentPage: p};let i = index">
             <div *ngIf="this.searchText === '' || item.name.includes(searchText) || item.typo.includes(searchText)"
                  class="card m-2 align-items-center justify-content-center bg-25 {{item.types[0].type.name}}"
                  style="width: 18rem;">
@@ -69,6 +69,7 @@
               </div>
             </div>
           </ng-container>
+          <pagination-controls (pageChange)="p = $event"></pagination-controls>
         </div>
       </div>
       <!-------------------------------------------End Pokemon Card------------------------------------>
