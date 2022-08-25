@@ -1,46 +1,68 @@
-<div class="col-12 mt-3">
-  <div class="row">
-  <!--  Search Bar-->
-    <div class="col-12 d-flex justify-content-start">
-      <input class="form-control" type="text" name="search" [(ngModel)]="item.name" placeholder="Search..." >
-      <button class="btn btn-info" (click)="sort('name')">Name</button>
-      <button class="btn btn-info" (click)="sort('typo')">Type</button>
-      <button class="btn btn-info" (click)="sort('hp')">Hp</button>
-      <button class="btn btn-info" (click)="sort('attack')">Attack</button>
-      <button class="btn btn-info" (click)="sort('defense')">Defense</button>
-      <button class="btn btn-info" (click)="sort('specialAttack')">Special Attack</button>
-      <button class="btn btn-info" (click)="sort('specialDefense')">Special Defense</button>
-      <button class="btn btn-info" (click)="sort('speed')">Speed</button>
-    </div>
-  </div>
-</div>
 <div class="col-12 mt-5">
   <div class="row justify-content-center">
-    <div *ngFor="let item of this.pokemon|filter:item.name|orderBy: key: reverse " class="card m-2 align-items-center bg-25 {{item.types[0].type.name}}" style="width: 18rem;">
+    <!-------------------------------------------Search Bar------------------------------------>
+    <div class="align-items-center justify-content-center ">
+      <div class="w-25 m-auto">
+        <input class="form-control" type="text" name="search" [(ngModel)]="item.name" placeholder="Search...">
+      </div>
+
+      <!-------------------------------------------Sorting------------------------------------>
+      <div class="col-8  m-auto mt-2 d-flex justify-content-around">Sort by:
+        <button class="btn btn-info" (click)="sort('name')">Name
+          <i *ngIf="reverse" class="bi bi-sort-alpha-up"></i>
+          <i *ngIf="!reverse" class="bi bi-sort-alpha-down"></i></button>
+        <button class="btn btn-info" (click)="sort('typo')">Type
+          <i *ngIf="reverse" class="bi bi-sort-alpha-up"></i>
+          <i *ngIf="!reverse" class="bi bi-sort-alpha-down"></i></button>
+        <button class="btn btn-info" (click)="sort('hp')">Hp
+          <i *ngIf="reverse" class="bi bi-sort-numeric-up"></i>
+          <i *ngIf="!reverse" class="bi bi-sort-numeric-down"></i></button>
+        <button class="btn btn-info" (click)="sort('attack')">Attack
+          <i *ngIf="reverse" class="bi bi-sort-numeric-up"></i>
+          <i *ngIf="!reverse" class="bi bi-sort-numeric-down"></i></button>
+        <button class="btn btn-info" (click)="sort('defense')">Defense
+          <i *ngIf="reverse" class="bi bi-sort-numeric-up"></i>
+          <i *ngIf="!reverse" class="bi bi-sort-numeric-down"></i></button>
+        <button class="btn btn-info" (click)="sort('specialAttack')">S.Attack
+          <i *ngIf="reverse" class="bi bi-sort-numeric-up"></i>
+          <i *ngIf="!reverse" class="bi bi-sort-numeric-down"></i></button>
+        <button class="btn btn-info" (click)="sort('specialDefense')">S.Defense
+          <i *ngIf="reverse" class="bi bi-sort-numeric-up"></i>
+          <i *ngIf="!reverse" class="bi bi-sort-numeric-down"></i></button>
+        <button class="btn btn-info" (click)="sort('speed')">Speed
+          <i *ngIf="reverse" class="bi bi-sort-numeric-up"></i>
+          <i *ngIf="!reverse" class="bi bi-sort-numeric-down"></i></button>
+      </div>
+    </div>
+    <!-------------------------------------------Pokemon Card------------------------------------------>
+
+    <div *ngFor="let item of this.pokemon|filter:item.name|orderBy: key: reverse "
+         class="card m-2 align-items-center bg-25 {{item.types[0].type.name}}" style="width: 18rem;">
       <div class="image-container">
         <img src="{{item.sprites.other.home.front_default}}" class="card-img-top">
       </div>
-        <div class="card-body">
-          <h5 class="card-title text-center">{{item.name}}</h5>
+      <div class="card-body titlePokemon">
+        <h5 class="card-title text-center">{{item.name}}</h5>
+      </div>
+      <div class="col-12 mt-3 info-pokemon">
+        <div class="row">
+          <div class="col-6">
+            <p>Pokemon Info:</p>
+          </div>
+          <div class="col-6 text-end">
+            <p>type: <br>{{ item.types[0].type.name}} </p>
+          </div>
         </div>
-            <div class="col-12 mt-3">
-              <div class="row">
-                <div class="col-6">
-                  <p>Pokemon Info:</p>
-                </div>
-                <div class="col-6 text-end">
-                  <p>type: <br>{{ item.types[0].type.name}} </p>
-                </div>
-              </div>
-
-              <table class="col-12">
-                <tr *ngFor="let item2 of item.stats">{{item2.stat.name|orderBy: key: reverse}}
-                  <td>
-                    {{item2.base_stat}}
-                  </td>
-                </tr>
-              </table>
-            </div>
+        <!-------------------------------------------Card Stats Section------------------------------------>
+        <table class="col-12 mb-3">
+          <tr *ngFor="let item2 of item.stats">{{item2.stat.name|orderBy: key: reverse}}
+            <td>
+              {{item2.base_stat}}
+            </td>
+          </tr>
+        </table>
+      </div>
     </div>
+    <!-------------------------------------------End Pokemon Card------------------------------------>
   </div>
 </div>
