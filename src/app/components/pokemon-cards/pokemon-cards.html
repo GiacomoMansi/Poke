@@ -1,44 +1,51 @@
 <div class="container-fluid">
-  <div class="row">
+  <div  class="row">
+
     <div class="col-12">
+      <label class="input-group-text w-25 d-flex justify-content-around" for="inputGroupSelect01">{{"selectLanguage" | translate}}
+        <select (change)="selectLanguage($event)" class="form-select w-50 ml-5" id="inputGroupSelect">
+          <option value="en">English</option>
+          <option value="it">Italiano</option>
+        </select></label>
+
       <!-------------------------------------------Search Bar------------------------------------>
       <div class="align-items-center justify-content-center mt-5 ">
         <div class="w-25 m-auto">
           <input class="form-control" type="text" name="search" [(ngModel)]="this.searchText"
-                 (click)="config.currentPage = 1" placeholder="Search a Pokemon or a type"> <!--Click Event ritorna alla prima pagina-->
+                 (click)="config.currentPage = 1" placeholder="{{'search_placeholder' | translate}}"> <!--Click Event ritorna alla prima pagina-->
           <div class="input-group mb-3 mt-3">
-            <label class="input-group-text" for="inputGroupSelect01">Pokemon Type</label>
+            <label class="input-group-text" for="inputGroupSelect01">{{"pokemon_type_option" | translate}}</label>
             <select (click)="config.currentPage = 1" class="form-select" id="inputGroupSelect01"
                     [(ngModel)]="selectedOption">
-              <option [value]="type.value" *ngFor="let type of this.options" value="">{{type.name}}</option>
+              <option [value]="type.value" *ngFor="let type of this.options" value="">{{type.name | translate}}</option>
             </select>
           </div>
         </div>
 
         <!-------------------------------------------Sorting------------------------------------>
-        <div class="col-8  m-auto mt-2 d-flex justify-content-around text">Sort by:
-          <button class="btn btn-info" (click)="sort('name')">Name
+        <div class="col-8  m-auto mt-2 d-flex justify-content-around text">{{"sort" | translate}}
+          <button class="btn btn-info" (click)="sort('name')">{{'name' | translate}}
             <i *ngIf="reverse" class="bi bi-sort-alpha-up"></i>
             <i *ngIf="!reverse" class="bi bi-sort-alpha-down"></i></button>
-          <button class="btn btn-info" (click)="sort('typo')">Type
+          <button class="btn btn-info" (click)="sort('typo')">{{"typo" | translate}}
             <i *ngIf="reverse" class="bi bi-sort-alpha-up"></i>
             <i *ngIf="!reverse" class="bi bi-sort-alpha-down"></i></button>
-          <button class="btn btn-info" (click)="sort('hp')">Hp
+          <button class="btn btn-info" (click)="sort('hp')">{{'hp' | translate}}
             <i *ngIf="reverse" class="bi bi-sort-numeric-up"></i>
             <i *ngIf="!reverse" class="bi bi-sort-numeric-down"></i></button>
-          <button class="btn btn-info" (click)="sort('attack')">Attack
+          <button class="btn btn-info" (click)="sort('attack')">{{'attack' | translate}}
             <i *ngIf="reverse" class="bi bi-sort-numeric-up"></i>
             <i *ngIf="!reverse" class="bi bi-sort-numeric-down"></i></button>
-          <button class="btn btn-info" (click)="sort('defense')">Defense
+          <button class="btn btn-info" (click)="sort('defense')">{{'defense' | translate}}
             <i *ngIf="reverse" class="bi bi-sort-numeric-up"></i>
             <i *ngIf="!reverse" class="bi bi-sort-numeric-down"></i></button>
-          <button class="btn btn-info" (click)="sort('specialAttack')">S.Attack
+          <button class="btn btn-info" (click)="sort('specialAttack')">{{'special-attack' | translate}}
             <i *ngIf="reverse" class="bi bi-sort-numeric-up"></i>
             <i *ngIf="!reverse" class="bi bi-sort-numeric-down"></i></button>
-          <button class="btn btn-info" (click)="sort('specialDefense')">S.Defense
+          <button class="btn btn-info" (click)="sort('specialDefense')">{{'special-defense' | translate}}
             <i *ngIf="reverse" class="bi bi-sort-numeric-up"></i>
             <i *ngIf="!reverse" class="bi bi-sort-numeric-down"></i></button>
-          <button class="btn btn-info" (click)="sort('speed')">Speed
+          <button class="btn btn-info" (click)="sort('speed')">{{'speed' | translate}}
             <i *ngIf="reverse" class="bi bi-sort-numeric-up"></i>
             <i *ngIf="!reverse" class="bi bi-sort-numeric-down"></i></button>
         </div>
@@ -63,12 +70,12 @@
                     <p>Pokemon Info</p>
                   </div>
                   <div class="col-6 text-end">
-                    <p>type <br>{{ item.types[0].type.name}} </p>
+                    <p>{{"typo" | translate}} <br>{{ item.types[0].type.name | translate}} </p>
                   </div>
                 </div>
                 <!-------------------------------------------Card Stats Section------------------------------------>
                 <table class="col-12 mb-3">
-                  <tr *ngFor="let item2 of item.stats">{{item2.stat.name|orderBy: key: reverse}}
+                  <tr *ngFor="let item2 of item.stats">{{item2.stat.name|translate|orderBy: key: reverse}}
                     <td>
                       {{item2.base_stat}}
                     </td>

@@ -1,6 +1,7 @@
 import {Component, EventEmitter, OnInit,} from '@angular/core';
 import {PokemonService} from "../../services/pokemon.service";
 import {HttpClient} from "@angular/common/http";
+import {TranslateService} from "@ngx-translate/core";
 
 
 @Component({
@@ -9,7 +10,7 @@ import {HttpClient} from "@angular/common/http";
   styleUrls: ['./pokemon-cards.component.css']
 })
 export class PokemonSearchComponent implements OnInit {
-  constructor(public pokemonService: PokemonService, public http: HttpClient,) {
+  constructor(public pokemonService: PokemonService, public http: HttpClient, private translateService: TranslateService) {
   }
 
   public pokemonApi: any = []; // Array conentente la chiamata all'api
@@ -18,27 +19,29 @@ export class PokemonSearchComponent implements OnInit {
   public selectedOption: string = ""
   public args: any = [];
   public options = [
-    {name: "All", value: ""},
-    {name: "Grass", value: "grass"},
-    {name: "Normal", value: "normal"},
-    {name: "Fighting", value: "fighting"},
-    {name: "Flying", value: "flying"},
-    {name: "Poison", value: "poison"},
-    {name: "Ground", value: "ground"},
-    {name: "Rock", value: "rock"},
-    {name: "Bug", value: "bug"},
-    {name: "Ghost", value: "ghost"},
-    {name: "Steel", value: "steel"},
-    {name: "Fire", value: "fire"},
-    {name: "Water", value: "water"},
-    {name: "Electric", value: "electric"},
-    {name: "Psychic", value: "psychic"},
-    {name: "Ice", value: "ice"},
-    {name: "Dragon", value: "dragon"},
-    {name: "Dark", value: "dark"},
-    {name: "Fairy", value: "fairy"},
+    {name: "all", value: ""},
+    {name: "grass", value: "grass"},
+    {name: "normal", value: "normal"},
+    {name: "fighting", value: "fighting"},
+    {name: "flying", value: "flying"},
+    {name: "poison", value: "poison"},
+    {name: "ground", value: "ground"},
+    {name: "rock", value: "rock"},
+    {name: "bug", value: "bug"},
+    {name: "ghost", value: "ghost"},
+    {name: "steel", value: "steel"},
+    {name: "fire", value: "fire"},
+    {name: "water", value: "water"},
+    {name: "electric", value: "electric"},
+    {name: "psychic", value: "psychic"},
+    {name: "ice", value: "ice"},
+    {name: "dragon", value: "dragon"},
+    {name: "dark", value: "dark"},
+    {name: "fairy", value: "fairy"},
   ]
-
+  public selectLanguage(event: any) {
+    this.translateService.use(event.target.value)
+  }
   async ngOnInit() {
     this.pokemonApi = await this.pokemonService.getPokemon() //Chiamo il service e inserisco il response nell'array
 
@@ -56,13 +59,11 @@ export class PokemonSearchComponent implements OnInit {
           Object.assign(this.onePokemon, {speed: this.onePokemon.stats[5].base_stat})
           //Assegno il tipo di pokemon all'oggetto onePokemon
           Object.assign(this.onePokemon, {typo: this.onePokemon.types[0].type.name})
-
         })
       )
     }
     await pokemonCompleteList()
-
-
+    console.log(this.pokemon)
   }
 
   //Search Input by Pokemon Name or Pokemon Type
@@ -140,7 +141,7 @@ export class PokemonSearchComponent implements OnInit {
       multiplier = -1
     }
 
-    this.pokemon.sort((a: any, b: any, name: string = "") => {
+    this.pokemon.sort((a: any, b: any) => {
       if (a.hp < b.hp) {
         return -1 * multiplier
       } else if (a.hp > b.hp) {
@@ -157,7 +158,7 @@ export class PokemonSearchComponent implements OnInit {
     if (!this.orderAttack) {
       multiplier = -1
     }
-    this.pokemon.sort((a: any, b: any, name: string = "") => {
+    this.pokemon.sort((a: any, b: any) => {
       if (a.attack < b.attack) {
         return -1 * multiplier
       } else if (a.attack > b.attack) {
@@ -174,7 +175,7 @@ export class PokemonSearchComponent implements OnInit {
     if (!this.orderDefense) {
       multiplier = -1
     }
-    this.pokemon.sort((a: any, b: any, name: string = "") => {
+    this.pokemon.sort((a: any, b: any,) => {
       if (a.defense < b.defense) {
         return -1 * multiplier
       } else if (a.defense > b.defense) {
@@ -191,7 +192,7 @@ export class PokemonSearchComponent implements OnInit {
     if (!this.orderSpecialAttack) {
       multiplier = -1
     }
-    this.pokemon.sort((a: any, b: any, name: string = "") => {
+    this.pokemon.sort((a: any, b: any) => {
       if (a.specialAttack < b.specialAttack) {
         return -1 * multiplier
       } else if (a.specialAttack > b.specialAttack) {
@@ -208,7 +209,7 @@ export class PokemonSearchComponent implements OnInit {
     if (!this.orderSpecialDefense) {
       multiplier = -1
     }
-    this.pokemon.sort((a: any, b: any, name: string = "") => {
+    this.pokemon.sort((a: any, b: any) => {
       if (a.specialDefense < b.specialDefense) {
         return -1 * multiplier
       } else if (a.specialDefense > b.specialDefense) {
@@ -225,7 +226,7 @@ export class PokemonSearchComponent implements OnInit {
     if (!this.orderSpeed) {
       multiplier = -1
     }
-    this.pokemon.sort((a: any, b: any, name: string = "") => {
+    this.pokemon.sort((a: any, b: any) => {
       if (a.speed < b.speed) {
         return -1 * multiplier
       } else if (a.speed > b.speed) {
@@ -236,5 +237,6 @@ export class PokemonSearchComponent implements OnInit {
     })
     this.orderSpeed = !this.orderSpeed
   }
+
 }
 
