@@ -14,6 +14,6 @@ export class PokemonService {
   constructor(public http: HttpClient) { }
 
   async getPokemon() {
-    return this.http.get("https://pokeapi.co/api/v2/pokemon/?offset=0&limit=145").toPromise();
+    return this.http.get("https://pokeapi.co/api/v2/pokemon/?offset=0&limit=599").toPromise();
   }
 }
