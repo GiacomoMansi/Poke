@@ -19,6 +19,7 @@ export class PokemonSearchComponent implements OnInit {
   public onePokemon: any = [];
   public selectedOption: string = ""
   public args: any = [];
+  public errormessage: any
   public options = [
     {name: "all", value: ""},
     {name: "grass", value: "grass"},
@@ -39,11 +40,16 @@ export class PokemonSearchComponent implements OnInit {
     {name: "dark", value: "dark"},
     {name: "fairy", value: "fairy"},
   ]
+
   public selectLanguage(event: any) {
     this.translateService.use(event.target.value)
   }
+
   async ngOnInit() {
-    this.pokemonApi = await this.pokemonService.getPokemon() //Chiamo il service e inserisco il response nell'array
+    this.pokemonApi = await this.pokemonService.getPokemon()
+      .catch(error => {
+        this.errormessage = error.message
+      }) //Chiamo il service e inserisco il response nell'array, e catturo l'errore per poi restituirlo all'utente
 
     const pokemonCompleteList = async (): Promise<any> => {
       await Promise.all(
