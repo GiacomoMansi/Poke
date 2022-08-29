@@ -13,7 +13,6 @@ import {firstValueFrom} from "rxjs";
 export class PokemonSearchComponent implements OnInit {
   constructor(public pokemonService: PokemonService, public http: HttpClient, private translateService: TranslateService) {
   }
-
   public pokemonApi: any = []; // Array conentente la chiamata all'api
   public pokemon: any = [];
   public onePokemon: any = [];

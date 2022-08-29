@@ -1,93 +1,110 @@
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-12">
-      <label class="input-group-text w-25 d-flex justify-content-around mt-3"
-             for="inputGroupSelect01">{{"selectLanguage" | translate}}
-        <select (change)="selectLanguage($event)" class="form-select w-50 ml-5" id="inputGroupSelect">
-          <option value="en">English</option>
-          <option value="it">Italiano</option>
-        </select></label>
+<div class="container-fluid container-xxl p-0">
+  <div class="col-xl-12 col-12">
+    <div class="row">
+      <div class="col-lg-12 col-md-12 col-sm-4 col-xs-4">
 
-      <!-------------------------------------------Search Bar------------------------------------>
-      <div class="align-items-center justify-content-center mt-5 ">
-        <div class="w-25 m-auto">
-          <input class="form-control" type="text" name="search" [(ngModel)]="this.searchText"
-                 (click)="config.currentPage = 1" placeholder="{{'search_placeholder' | translate}}">
-          <!--Click Event ritorna alla prima pagina-->
-          <div class="input-group mb-3 mt-3">
-            <label class="input-group-text" for="inputGroupSelect01">{{"pokemon_type_option" | translate}}</label>
-            <select (click)="config.currentPage = 1" class="form-select" id="inputGroupSelect01"
-                    [(ngModel)]="selectedOption">
-              <option [value]="type.value" *ngFor="let type of this.options" value="">{{type.name | translate}}</option>
-            </select>
+        <!-------------------------------------------Selector for Languages ------------------------------------>
+        <div class="col-lg-4 col-sm-4 col-10 m-auto m-lg-0 m-md-3">
+          <div class="row">
+            <label class="input-group-text justify-content-around mt-3"
+                   for="inputGroupSelect01">{{"selectLanguage" | translate}}
+              <select (change)="selectLanguage($event)" class="form-select w-50 " id="inputGroupSelect">
+                <option value="en">English</option>
+                <option value="it">Italiano</option>
+              </select></label>
           </div>
         </div>
 
-        <!-------------------------------------------Sorting------------------------------------>
-        <div class="m-auto mt-2 d-flex justify-content-around text sort w-75">{{"sort" | translate}}
-          <button class="btn btn-info" (click)="sort('name')">{{'name' | translate}}
-            <i *ngIf="reverse" class="bi bi-sort-alpha-up"></i>
-            <i *ngIf="!reverse" class="bi bi-sort-alpha-down"></i></button>
-          <button class="btn btn-info" (click)="sort('typo')">{{"typo" | translate}}
-            <i *ngIf="reverse" class="bi bi-sort-alpha-up"></i>
-            <i *ngIf="!reverse" class="bi bi-sort-alpha-down"></i></button>
-          <button class="btn btn-info" (click)="sort('hp')">{{'hp' | translate}}
-            <i *ngIf="reverse" class="bi bi-sort-numeric-up"></i>
-            <i *ngIf="!reverse" class="bi bi-sort-numeric-down"></i></button>
-          <button class="btn btn-info" (click)="sort('attack')">{{'attack' | translate}}
-            <i *ngIf="reverse" class="bi bi-sort-numeric-up"></i>
-            <i *ngIf="!reverse" class="bi bi-sort-numeric-down"></i></button>
-          <button class="btn btn-info" (click)="sort('defense')">{{'defense' | translate}}
-            <i *ngIf="reverse" class="bi bi-sort-numeric-up"></i>
-            <i *ngIf="!reverse" class="bi bi-sort-numeric-down"></i></button>
-          <button class="btn btn-info" (click)="sort('specialAttack')">{{'special-attack' | translate}}
-            <i *ngIf="reverse" class="bi bi-sort-numeric-up"></i>
-            <i *ngIf="!reverse" class="bi bi-sort-numeric-down"></i></button>
-          <button class="btn btn-info" (click)="sort('specialDefense')">{{'special-defense' | translate}}
-            <i *ngIf="reverse" class="bi bi-sort-numeric-up"></i>
-            <i *ngIf="!reverse" class="bi bi-sort-numeric-down"></i></button>
-          <button class="btn btn-info" (click)="sort('speed')">{{'speed' | translate}}
-            <i *ngIf="reverse" class="bi bi-sort-numeric-up"></i>
-            <i *ngIf="!reverse" class="bi bi-sort-numeric-down"></i></button>
-        </div>
-      </div>
-      <!-------------------------------------------Pokemon Card------------------------------------------>
-      <div class="container">
-        <div class="row d-flex  justify-content-center m-auto">
-          <ng-container
-            *ngFor="let item of this.pokemon|search: 'name,typo': searchText || selectedOption|orderBy: key: reverse|paginate: config;">
-            <div
-              class="card m-2 align-items-center justify-content-center bg-25 {{item.types[0].type.name}}"
-              style="width: 18rem;">
-              <div class="image-container">
-                <img src="{{item.sprites.other.home.front_default}}" class="card-img-top">
-              </div>
-              <div class="card-body titlePokemon">
-                <h5 class="card-title text-center">{{item.name}}</h5>
-              </div>
-              <div class="col-12 mt-3 info-pokemon">
-                <div class="row">
-                  <div class="col-6">
-                    <p>Pokemon Info</p>
-                  </div>
-                  <div class="col-6 text-end">
-                    <p>{{"typo" | translate}} <br>{{ item.types[0].type.name | translate}} </p>
-                  </div>
+
+        <!-------------------------------------------Search Bar------------------------------------>
+        <div class="container ">
+          <div class="row">
+            <div class="col-12 align-items-center justify-content-center mt-5 ">
+              <div class="col-lg-4 col-12 m-auto">
+                <input class="form-control" type="text" name="search" [(ngModel)]="this.searchText"
+                       (click)="config.currentPage = 1" placeholder="{{'search_placeholder' | translate}}">
+                <!--Click Event ritorna alla prima pagina-->
+                <div class="input-group mb-3 mt-3">
+                  <label class="input-group-text" for="inputGroupSelect01">{{"pokemon_type_option" | translate}}</label>
+                  <select (click)="config.currentPage = 1" class="form-select" id="inputGroupSelect01"
+                          [(ngModel)]="selectedOption">
+                    <option [value]="type.value" *ngFor="let type of this.options"
+                            value="">{{type.name | translate}}</option>
+                  </select>
                 </div>
-                <!-------------------------------------------Card Stats Section------------------------------------>
-                <table class="col-12 mb-3">
-                  <tr *ngFor="let item2 of item.stats">{{item2.stat.name|translate|orderBy: key: reverse}}
-                    <td>
-                      {{item2.base_stat}}
-                    </td>
-                  </tr>
-                </table>
+              </div>
+
+              <!-------------------------------------------Sorting------------------------------------>
+              <div class="col-lg-8 col-12 flex-wrap m-auto d-flex justify-content-around">{{"sort" | translate}}
+                <button class="btn btn-info mb-1" (click)="sort('name')">{{'name' | translate}}
+                  <i *ngIf="reverse" class="bi bi-sort-alpha-up"></i>
+                  <i *ngIf="!reverse" class="bi bi-sort-alpha-down"></i></button>
+                <button class="btn btn-info mb-1" (click)="sort('typo')">{{"typo" | translate}}
+                  <i *ngIf="reverse" class="bi bi-sort-alpha-up"></i>
+                  <i *ngIf="!reverse" class="bi bi-sort-alpha-down"></i></button>
+                <button class="btn btn-info mb-1" (click)="sort('hp')">{{'hp' | translate}}
+                  <i *ngIf="reverse" class="bi bi-sort-numeric-up"></i>
+                  <i *ngIf="!reverse" class="bi bi-sort-numeric-down"></i></button>
+                <button class="btn btn-info mb-1" (click)="sort('attack')">{{'attack' | translate}}
+                  <i *ngIf="reverse" class="bi bi-sort-numeric-up"></i>
+                  <i *ngIf="!reverse" class="bi bi-sort-numeric-down"></i></button>
+                <button class="btn btn-info mb-1" (click)="sort('defense')">{{'defense' | translate}}
+                  <i *ngIf="reverse" class="bi bi-sort-numeric-up"></i>
+                  <i *ngIf="!reverse" class="bi bi-sort-numeric-down"></i></button>
+                <button class="btn btn-info mb-1" (click)="sort('specialAttack')">{{'special-attack' | translate}}
+                  <i *ngIf="reverse" class="bi bi-sort-numeric-up"></i>
+                  <i *ngIf="!reverse" class="bi bi-sort-numeric-down"></i></button>
+                <button class="btn btn-info mb-1" (click)="sort('specialDefense')">{{'special-defense' | translate}}
+                  <i *ngIf="reverse" class="bi bi-sort-numeric-up"></i>
+                  <i *ngIf="!reverse" class="bi bi-sort-numeric-down"></i></button>
+                <button class="btn btn-info mb-1" (click)="sort('speed')">{{'speed' | translate}}
+                  <i *ngIf="reverse" class="bi bi-sort-numeric-up"></i>
+                  <i *ngIf="!reverse" class="bi bi-sort-numeric-down"></i></button>
               </div>
             </div>
-          </ng-container>
-          <div *ngIf="this.errormessage" class="alert alert-warning text-center mt-5 mb-5" role="alert">
-            <h4>{{this.errormessage}}</h4>
           </div>
+        </div>
+
+        <!-------------------------------------------Pokemon Card------------------------------------------>
+        <div class="container-fluid">
+          <div class="row align-items-center justify-content-center m-auto">
+            <ng-container
+              *ngFor="let item of this.pokemon|search: 'name,typo': searchText || selectedOption|orderBy: key: reverse|paginate: config;">
+              <div
+                class="card m-2 align-items-center justify-content-center bg-25 {{item.types[0].type.name}}"
+                style="width: 18rem;">
+                <div class="image-container">
+                  <img src="{{item.sprites.other.home.front_default}}" class="card-img-top">
+                </div>
+                <div class="card-body titlePokemon">
+                  <h5 class="card-title text-center">{{item.name}}</h5>
+                </div>
+                <div class="col-12 mt-3 info-pokemon">
+                  <div class="row">
+                    <div class="col-6">
+                      <p>Stats</p>
+                    </div>
+                    <div class="col-6 text-end">
+                      <p>{{"typo" | translate}} <br>{{ item.types[0].type.name | translate}} </p>
+                    </div>
+                  </div>
+                  <!-------------------------------------------Card Stats Section------------------------------------>
+                  <table class="col-12 mb-3">
+                    <tr *ngFor="let item2 of item.stats">{{item2.stat.name|translate|orderBy: key: reverse}}
+                      <td>
+                        {{item2.base_stat}}
+                      </td>
+                    </tr>
+                  </table>
+                </div>
+              </div>
+            </ng-container>
+            <div *ngIf="this.errormessage" class="alert alert-warning text-center mt-5 mb-5" role="alert">
+              <h4>{{this.errormessage}}</h4>
+            </div>
+          </div>
+        </div>
+        <div class="co-12 d-flex justify-content-center mt-5">
           <pagination-controls (pageChange)="config.currentPage = $event"></pagination-controls>
         </div>
       </div>
@@ -95,6 +112,7 @@
     </div>
   </div>
 </div>
+
 
 <!--Sopra esempio di codice usando i pipe
     sotto senza usare i pipe con funzioni costruite a mano-->
