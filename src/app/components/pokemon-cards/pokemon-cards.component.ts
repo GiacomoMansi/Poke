@@ -2,6 +2,7 @@ import {Component, EventEmitter, OnInit,} from '@angular/core';
 import {PokemonService} from "../../services/pokemon.service";
 import {HttpClient} from "@angular/common/http";
 import {TranslateService} from "@ngx-translate/core";
+import {firstValueFrom} from "rxjs";
 
 
 @Component({
@@ -23,7 +24,6 @@ export class PokemonSearchComponent implements OnInit {
     {name: "grass", value: "grass"},
     {name: "normal", value: "normal"},
     {name: "fighting", value: "fighting"},
-    {name: "flying", value: "flying"},
     {name: "poison", value: "poison"},
     {name: "ground", value: "ground"},
     {name: "rock", value: "rock"},
@@ -47,8 +47,8 @@ export class PokemonSearchComponent implements OnInit {
 
     const pokemonCompleteList = async (): Promise<any> => {
       await Promise.all(
-        this.pokemonApi.results.map(async (pokemon: any): Promise<any> => { //
-          this.onePokemon = await this.http.get(`https://pokeapi.co/api/v2/pokemon/${pokemon.name}`).toPromise()
+        this.pokemonApi.results.map(async (pokemon: any): Promise<any> => {
+          this.onePokemon = await firstValueFrom(this.http.get(`https://pokeapi.co/api/v2/pokemon/${pokemon.name}`))
           this.pokemon.push(this.onePokemon) //Inserisco il singolo pokemon nell'array pokemon
           //Assegno le statistiche all'oggetto onePokemon
           Object.assign(this.onePokemon, {hp: this.onePokemon.stats[0].base_stat})
@@ -63,16 +63,14 @@ export class PokemonSearchComponent implements OnInit {
       )
     }
     await pokemonCompleteList()
-    console.log(this.pokemon)
   }
 
-  //Search Input by Pokemon Name or Pokemon Type
+  //Input per la ricerca
   searchText: string = "";
   searchTextChanged: EventEmitter<string> = new EventEmitter<string>()
 
   onSearchTextChanged() {
     this.searchTextChanged.emit(this.searchText)
-    console.log(this.pokemon)
   }
 
   //Ordine alfabetico, tipo, statistiche
@@ -82,7 +80,6 @@ export class PokemonSearchComponent implements OnInit {
   sort(key: any) {
     this.key = key
     this.reverse = !this.reverse
-
   }
 
   //Configurazione paginazione
@@ -103,140 +100,140 @@ export class PokemonSearchComponent implements OnInit {
   public orderSpecialDefense: boolean = false;
   public orderSpeed: boolean = false;
 
-
-  sortPokemonName() {
-    let multiplier = 1;
-    if (!this.orderName) {
-      multiplier = -1
-    }
-    this.pokemon.sort((a: any, b: any,) => {
-      if (a.name < b.name) {
-        return -1 * multiplier
-      } else if (a.name > b.name) {
-        return multiplier;
-      } else {
-        return 0
-      }
-    })
-    this.orderName = !this.orderName
-  }
-
-  sortPokemonType() {
-    this.pokemon.sort((a: any, b: any,) => {
-      if (a.typo < b.typo) {
-        return -1
-      } else if (a.typo > b.typo) {
-        if (!this.orderType) {
-          return -1
-        }
-      }
-      return 0
-    })
-    this.orderType = !this.orderType
-  }
-
-  sortPokemonHp() {
-    let multiplier = 1;
-    if (!this.orderHp) {
-      multiplier = -1
-    }
-
-    this.pokemon.sort((a: any, b: any) => {
-      if (a.hp < b.hp) {
-        return -1 * multiplier
-      } else if (a.hp > b.hp) {
-        return multiplier;
-      } else {
-        return 0
-      }
-    })
-    this.orderHp = !this.orderHp
-  }
-
-  sortPokemonAttack() {
-    let multiplier = 1;
-    if (!this.orderAttack) {
-      multiplier = -1
-    }
-    this.pokemon.sort((a: any, b: any) => {
-      if (a.attack < b.attack) {
-        return -1 * multiplier
-      } else if (a.attack > b.attack) {
-        return multiplier;
-      } else {
-        return 0
-      }
-    })
-    this.orderAttack = !this.orderAttack
-  }
-
-  sortPokemonDefense() {
-    let multiplier = 1;
-    if (!this.orderDefense) {
-      multiplier = -1
-    }
-    this.pokemon.sort((a: any, b: any,) => {
-      if (a.defense < b.defense) {
-        return -1 * multiplier
-      } else if (a.defense > b.defense) {
-        return multiplier;
-      } else {
-        return 0
-      }
-    })
-    this.orderDefense = !this.orderDefense
-  }
-
-  sortPokemonSpecialAttack() {
-    let multiplier = 1;
-    if (!this.orderSpecialAttack) {
-      multiplier = -1
-    }
-    this.pokemon.sort((a: any, b: any) => {
-      if (a.specialAttack < b.specialAttack) {
-        return -1 * multiplier
-      } else if (a.specialAttack > b.specialAttack) {
-        return multiplier;
-      } else {
-        return 0
-      }
-    })
-    this.orderSpecialAttack = !this.orderSpecialAttack
-  }
-
-  sortPokemonSpecialDefense() {
-    let multiplier = 1;
-    if (!this.orderSpecialDefense) {
-      multiplier = -1
-    }
-    this.pokemon.sort((a: any, b: any) => {
-      if (a.specialDefense < b.specialDefense) {
-        return -1 * multiplier
-      } else if (a.specialDefense > b.specialDefense) {
-        return multiplier;
-      } else {
-        return 0
-      }
-    })
-    this.orderSpecialDefense = !this.orderSpecialDefense
-  }
-
-  sortPokemonSpeed() {
-    let multiplier = 1;
-    if (!this.orderSpeed) {
-      multiplier = -1
-    }
-    this.pokemon.sort((a: any, b: any) => {
-      if (a.speed < b.speed) {
-        return -1 * multiplier
-      } else if (a.speed > b.speed) {
-        return multiplier;
-      } else {
-        return 0
-      }
-    })
-    this.orderSpeed = !this.orderSpeed
-  }
+  //Sorting fatto a mano per ogni singola voce(per capire meglio il funzionamento del pipe orderBy)
+  // sortPokemonName() {
+  //   let multiplier = 1;
+  //   if (!this.orderName) {
+  //     multiplier = -1
+  //   }
+  //   this.pokemon.sort((a: any, b: any,) => {
+  //     if (a.name < b.name) {
+  //       return -1 * multiplier
+  //     } else if (a.name > b.name) {
+  //       return multiplier;
+  //     } else {
+  //       return 0
+  //     }
+  //   })
+  //   this.orderName = !this.orderName
+  // }
+  //
+  // sortPokemonType() {
+  //   this.pokemon.sort((a: any, b: any,) => {
+  //     if (a.typo < b.typo) {
+  //       return -1
+  //     } else if (a.typo > b.typo) {
+  //       if (!this.orderType) {
+  //         return -1
+  //       }
+  //     }
+  //     return 0
+  //   })
+  //   this.orderType = !this.orderType
+  // }
+  //
+  // sortPokemonHp() {
+  //   let multiplier = 1;
+  //   if (!this.orderHp) {
+  //     multiplier = -1
+  //   }
+  //
+  //   this.pokemon.sort((a: any, b: any) => {
+  //     if (a.hp < b.hp) {
+  //       return -1 * multiplier
+  //     } else if (a.hp > b.hp) {
+  //       return multiplier;
+  //     } else {
+  //       return 0
+  //     }
+  //   })
+  //   this.orderHp = !this.orderHp
+  // }
+  //
+  // sortPokemonAttack() {
+  //   let multiplier = 1;
+  //   if (!this.orderAttack) {
+  //     multiplier = -1
+  //   }
+  //   this.pokemon.sort((a: any, b: any) => {
+  //     if (a.attack < b.attack) {
+  //       return -1 * multiplier
+  //     } else if (a.attack > b.attack) {
+  //       return multiplier;
+  //     } else {
+  //       return 0
+  //     }
+  //   })
+  //   this.orderAttack = !this.orderAttack
+  // }
+  //
+  // sortPokemonDefense() {
+  //   let multiplier = 1;
+  //   if (!this.orderDefense) {
+  //     multiplier = -1
+  //   }
+  //   this.pokemon.sort((a: any, b: any,) => {
+  //     if (a.defense < b.defense) {
+  //       return -1 * multiplier
+  //     } else if (a.defense > b.defense) {
+  //       return multiplier;
+  //     } else {
+  //       return 0
+  //     }
+  //   })
+  //   this.orderDefense = !this.orderDefense
+  // }
+  //
+  // sortPokemonSpecialAttack() {
+  //   let multiplier = 1;
+  //   if (!this.orderSpecialAttack) {
+  //     multiplier = -1
+  //   }
+  //   this.pokemon.sort((a: any, b: any) => {
+  //     if (a.specialAttack < b.specialAttack) {
+  //       return -1 * multiplier
+  //     } else if (a.specialAttack > b.specialAttack) {
+  //       return multiplier;
+  //     } else {
+  //       return 0
+  //     }
+  //   })
+  //   this.orderSpecialAttack = !this.orderSpecialAttack
+  // }
+  //
+  // sortPokemonSpecialDefense() {
+  //   let multiplier = 1;
+  //   if (!this.orderSpecialDefense) {
+  //     multiplier = -1
+  //   }
+  //   this.pokemon.sort((a: any, b: any) => {
+  //     if (a.specialDefense < b.specialDefense) {
+  //       return -1 * multiplier
+  //     } else if (a.specialDefense > b.specialDefense) {
+  //       return multiplier;
+  //     } else {
+  //       return 0
+  //     }
+  //   })
+  //   this.orderSpecialDefense = !this.orderSpecialDefense
+  // }
+  //
+  // sortPokemonSpeed() {
+  //   let multiplier = 1;
+  //   if (!this.orderSpeed) {
+  //     multiplier = -1
+  //   }
+  //   this.pokemon.sort((a: any, b: any) => {
+  //     if (a.speed < b.speed) {
+  //       return -1 * multiplier
+  //     } else if (a.speed > b.speed) {
+  //       return multiplier;
+  //     } else {
+  //       return 0
+  //     }
+  //   })
+  //   this.orderSpeed = !this.orderSpeed
+  // }
 
 }
 
