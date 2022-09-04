@@ -8,11 +8,13 @@ import {FormsModule} from '@angular/forms';
 import {SearchPipe} from './pipes/search.pipe';
 import {NgxPaginationModule} from 'ngx-pagination';
 import {TranslateModule, TranslateLoader} from '@ngx-translate/core';
-import { OrderModule } from 'ngx-order-pipe';
-import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import {OrderModule} from 'ngx-order-pipe';
+import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
+
 @NgModule({
   declarations: [
     AppComponent,
