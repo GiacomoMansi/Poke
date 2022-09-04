@@ -8,7 +8,7 @@
           <div class="row">
             <label class="input-group-text justify-content-around mt-3"
                    for="inputGroupSelect01">{{"selectLanguage" | translate}}
-              <select (change)="selectLanguage($event)" class="form-select w-50 " id="inputGroupSelect">
+              <select (change)="selectLanguage($event)" class="form-select w-50" id="inputGroupSelect">
                 <option value="en">English</option>
                 <option value="it">Italiano</option>
               </select></label>
@@ -17,10 +17,15 @@
 
 
         <!-------------------------------------------Search Bar------------------------------------>
-        <div class="container ">
+        <div class="container">
           <div class="row">
             <div class="col-12 align-items-center justify-content-center mt-5 ">
               <div class="col-lg-4 col-12 m-auto">
+                <div class="hero">
+                  <h1>Search Them All!
+                  </h1>
+
+                </div>
                 <input class="form-control" type="text" name="search" [(ngModel)]="this.searchText"
                        (click)="config.currentPage = 1" placeholder="{{'search_placeholder' | translate}}">
                 <!--Click Event ritorna alla prima pagina-->
@@ -36,28 +41,28 @@
 
               <!-------------------------------------------Sorting------------------------------------>
               <div class="col-lg-8 col-12 flex-wrap m-auto d-flex justify-content-around">{{"sort" | translate}}
-                <button class="btn btn-info mb-1" (click)="sort('name')">{{'name' | translate}}
+                <button class="btn mb-1" (click)="sort('name')">{{'name' | translate}}
                   <i *ngIf="reverse" class="bi bi-sort-alpha-up"></i>
                   <i *ngIf="!reverse" class="bi bi-sort-alpha-down"></i></button>
-                <button class="btn btn-info mb-1" (click)="sort('typo')">{{"typo" | translate}}
+                <button class="btn mb-1" (click)="sort('typo')">{{"typo" | translate}}
                   <i *ngIf="reverse" class="bi bi-sort-alpha-up"></i>
                   <i *ngIf="!reverse" class="bi bi-sort-alpha-down"></i></button>
-                <button class="btn btn-info mb-1" (click)="sort('hp')">{{'hp' | translate}}
+                <button class="btn mb-1" (click)="sort('hp')">{{'hp' | translate}}
                   <i *ngIf="reverse" class="bi bi-sort-numeric-up"></i>
                   <i *ngIf="!reverse" class="bi bi-sort-numeric-down"></i></button>
-                <button class="btn btn-info mb-1" (click)="sort('attack')">{{'attack' | translate}}
+                <button class="btn mb-1" (click)="sort('attack')">{{'attack' | translate}}
                   <i *ngIf="reverse" class="bi bi-sort-numeric-up"></i>
                   <i *ngIf="!reverse" class="bi bi-sort-numeric-down"></i></button>
-                <button class="btn btn-info mb-1" (click)="sort('defense')">{{'defense' | translate}}
+                <button class="btn mb-1" (click)="sort('defense')">{{'defense' | translate}}
                   <i *ngIf="reverse" class="bi bi-sort-numeric-up"></i>
                   <i *ngIf="!reverse" class="bi bi-sort-numeric-down"></i></button>
-                <button class="btn btn-info mb-1" (click)="sort('specialAttack')">{{'special-attack' | translate}}
+                <button class="btn mb-1" (click)="sort('specialAttack')">{{'special-attack' | translate}}
                   <i *ngIf="reverse" class="bi bi-sort-numeric-up"></i>
                   <i *ngIf="!reverse" class="bi bi-sort-numeric-down"></i></button>
-                <button class="btn btn-info mb-1" (click)="sort('specialDefense')">{{'special-defense' | translate}}
+                <button class="btn mb-1" (click)="sort('specialDefense')">{{'special-defense' | translate}}
                   <i *ngIf="reverse" class="bi bi-sort-numeric-up"></i>
                   <i *ngIf="!reverse" class="bi bi-sort-numeric-down"></i></button>
-                <button class="btn btn-info mb-1" (click)="sort('speed')">{{'speed' | translate}}
+                <button class="btn mb-1" (click)="sort('speed')">{{'speed' | translate}}
                   <i *ngIf="reverse" class="bi bi-sort-numeric-up"></i>
                   <i *ngIf="!reverse" class="bi bi-sort-numeric-down"></i></button>
               </div>
@@ -82,7 +87,7 @@
                 <div class="col-12 mt-3 info-pokemon">
                   <div class="row">
                     <div class="col-6">
-                      <p>Stats</p>
+                      <p>Pokemon Info</p>
                     </div>
                     <div class="col-6 text-end">
                       <p>{{"typo" | translate}} <br>{{ item.types[0].type.name | translate}} </p>
@@ -99,6 +104,11 @@
                 </div>
               </div>
             </ng-container>
+            <!-------------------------------------------Spinner loading------------------------------------>
+            <div *ngIf="this.isLoading" class="spinner-border text-primary mt-5" role="status">
+              <span class="visually-hidden">Loading...</span>
+            </div>
+            <!-------------------------------------------Error Message------------------------------------>
             <div *ngIf="this.errormessage" class="alert alert-warning text-center mt-5 mb-5" role="alert">
               <h4>{{this.errormessage}}</h4>
             </div>
