@@ -4,21 +4,36 @@ import {HttpClient} from "@angular/common/http";
 import {TranslateService} from "@ngx-translate/core";
 import {firstValueFrom} from "rxjs";
 
+export interface Pokemon {
+  name: string;
+  url: string;
+
+  map(pokemon: any): any;
+}
+export class PokemonApi {
+  count: number = 0;
+  next: string = "";
+  previous: null | undefined;
+  static results: Pokemon;
+}
+
 
 @Component({
   selector: 'app-pokemon-cards',
   templateUrl: './pokemon-cards.html',
   styleUrls: ['./pokemon-cards.component.css']
 })
+
 export class PokemonSearchComponent implements OnInit {
   constructor(public pokemonService: PokemonService, public http: HttpClient, private translateService: TranslateService) {
   }
-  public pokemonApi: any = []; // Array conentente la chiamata all'api
+
+  public pokemonApi = PokemonApi; // Array contenente la chiamata all'api
   public pokemon: any = [];
   public onePokemon: any = [];
   public selectedOption: string = ""
-  public args: any = [];
-  public errormessage: any
+  public errormessage: string = "";
+  public isLoading: boolean = true
   public options = [
     {name: "all", value: ""},
     {name: "grass", value: "grass"},
@@ -45,9 +60,9 @@ export class PokemonSearchComponent implements OnInit {
   }
 
   async ngOnInit() {
-    this.pokemonApi = await this.pokemonService.getPokemon()
+    this.pokemonApi = await <any>this.pokemonService.getPokemon()
       .catch(error => {
-        this.errormessage = error.message
+        return this.errormessage = error.message
       }) //Chiamo il service e inserisco il response nell'array, e catturo l'errore per poi restituirlo all'utente
 
     const pokemonCompleteList = async (): Promise<any> => {
@@ -67,6 +82,7 @@ export class PokemonSearchComponent implements OnInit {
         })
       )
     }
+    this.isLoading = false;
     await pokemonCompleteList()
   }
 
@@ -85,6 +101,7 @@ export class PokemonSearchComponent implements OnInit {
   sort(key: any) {
     this.key = key
     this.reverse = !this.reverse
+    let reverseName = !this.reverse
   }
 
   //Configurazione paginazione
@@ -239,6 +256,7 @@ export class PokemonSearchComponent implements OnInit {
   //   })
   //   this.orderSpeed = !this.orderSpeed
   // }
+
 
 }
 
