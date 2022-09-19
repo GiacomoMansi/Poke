@@ -1,11 +1,9 @@
-<div class="container-fluid container-xxl p-0">
-  <div class="col-xl-12 col-12">
-    <div class="row">
-      <div class="col-lg-12 col-md-12 col-sm-4 col-xs-4">
-
+<div class="container container-xxl p-0">
+  <div class="row mx-auto">
+    <div class="container-body mx-auto">
         <!-------------------------------------------Selector for Languages ------------------------------------>
-        <div class="col-lg-4 col-sm-4 col-10 m-auto m-lg-0 m-md-3">
-          <div class="row">
+        <div class="row">
+          <div class="col-lg-4 col-sm-4 col-10 m-auto m-md-3">
             <label class="input-group-text justify-content-around mt-3"
                    for="inputGroupSelect01">{{"selectLanguage" | translate}}
               <select (change)="selectLanguage($event)" class="form-select w-50" id="inputGroupSelect">
@@ -17,12 +15,11 @@
 
 
         <!-------------------------------------------Search Bar------------------------------------>
-        <div class="container">
           <div class="row">
-            <div class="col-12 align-items-center justify-content-center mt-5 ">
+            <div class="col-12 mt-5 ">
               <div class="col-lg-4 col-12 m-auto">
                 <div class="hero">
-                  <h1>Search Them All!
+                  <h1 class="m-md-1 text-center text-md-start">Search Them All!
                   </h1>
 
                 </div>
@@ -40,7 +37,7 @@
               </div>
 
               <!-------------------------------------------Sorting------------------------------------>
-              <div class="col-lg-8 col-12 flex-wrap m-auto d-flex justify-content-around">{{"sort" | translate}}
+              <div class="col-lg-8 col-12 flex-wrap m-auto d-flex justify-content-around"><p class="sort">{{"sort" | translate}}</p>
                 <button class="btn mb-1" (click)="sort('name')">{{'name' | translate}}
                   <i *ngIf="reverse" class="bi bi-sort-alpha-up"></i>
                   <i *ngIf="!reverse" class="bi bi-sort-alpha-down"></i></button>
@@ -68,11 +65,10 @@
               </div>
             </div>
           </div>
-        </div>
 
         <!-------------------------------------------Pokemon Card------------------------------------------>
-        <div class="container-fluid">
-          <div class="row align-items-center justify-content-center m-auto">
+        <div class="container-fluid mt-5">
+          <div class="row align-items-center justify-content-center mx-auto">
             <ng-container
               *ngFor="let item of this.pokemon|search: 'name,typo': searchText || selectedOption|orderBy: key: reverse|paginate: config;">
               <div
@@ -117,102 +113,8 @@
         <div class="co-12 d-flex justify-content-center mt-5">
           <pagination-controls (pageChange)="config.currentPage = $event"></pagination-controls>
         </div>
-      </div>
       <!-------------------------------------------End Pokemon Card------------------------------------>
     </div>
   </div>
 </div>
 
-
-<!--Sopra esempio di codice usando i pipe
-    sotto senza usare i pipe con funzioni costruite a mano-->
-
-
-<!--
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-12">
-      &lt;!&ndash;-&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;Search Bar&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&ndash;&gt;
-      <div class="align-items-center justify-content-center mt-5 ">
-        <div class="w-25 m-auto">
-          <input class="form-control" type="text" name="search" [(ngModel)]="this.searchText"
-                 (input)="onSearchTextChanged()"   (click)="config.currentPage = 1" placeholder="Search a Pokemon or a type"> &lt;!&ndash;Click Event ritorna alla prima pagina&ndash;&gt;
-          <div class="input-group mb-3 mt-3">
-            <label class="input-group-text" for="inputGroupSelect01">Pokemon Type</label>
-            <select (click)="config.currentPage = 1" class="form-select" id="inputGroupSelect01"
-                    [(ngModel)]="selectedOption">
-              <option [value]="type.value" *ngFor="let type of this.options" value="">{{type.name}}</option>
-            </select>
-          </div>
-        </div>
-
-        &lt;!&ndash;-&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;Sorting&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&ndash;&gt;
-        <div class="col-8  m-auto mt-2 d-flex justify-content-around text">Sort by:
-          <button class="btn btn-info" (click)="sortPokemonName()">Name
-            <i *ngIf="this.orderName" class="bi bi-sort-alpha-up"></i>
-            <i *ngIf="!this.orderName" class="bi bi-sort-alpha-down"></i></button>
-          <button class="btn btn-info" (click)="sortPokemonType()">Type
-            <i *ngIf="this.orderType" class="bi bi-sort-alpha-up"></i>
-            <i *ngIf="!this.orderType" class="bi bi-sort-alpha-down"></i></button>
-          <button class="btn btn-info" (click)="sortPokemonHp()">Hp
-            <i *ngIf="this.orderHp" class="bi bi-sort-numeric-up"></i>
-            <i *ngIf="!this.orderHp" class="bi bi-sort-numeric-down"></i></button>
-          <button class="btn btn-info" (click)="sortPokemonAttack()">Attack
-            <i *ngIf="this.orderAttack" class="bi bi-sort-numeric-up"></i>
-            <i *ngIf="!this.orderAttack" class="bi bi-sort-numeric-down"></i></button>
-          <button class="btn btn-info" (click)="sortPokemonDefense()">Defense
-            <i *ngIf="this.orderDefense" class="bi bi-sort-numeric-up"></i>
-            <i *ngIf="!this.orderDefense" class="bi bi-sort-numeric-down"></i></button>
-          <button class="btn btn-info" (click)="sortPokemonSpecialAttack()">S.Attack
-            <i *ngIf="this.orderSpecialAttack" class="bi bi-sort-numeric-up"></i>
-            <i *ngIf="!this.orderSpecialAttack" class="bi bi-sort-numeric-down"></i></button>
-          <button class="btn btn-info" (click)="sortPokemonSpecialDefense()">S.Defense
-            <i *ngIf="this.orderSpecialDefense" class="bi bi-sort-numeric-up"></i>
-            <i *ngIf="!this.orderSpecialDefense" class="bi bi-sort-numeric-down"></i></button>
-          <button class="btn btn-info" (click)="sortPokemonSpeed()">Speed
-            <i *ngIf="this.orderSpeed" class="bi bi-sort-numeric-up"></i>
-            <i *ngIf="!this.orderSpeed" class="bi bi-sort-numeric-down"></i></button>
-        </div>
-      </div>
-      &lt;!&ndash;-&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;Pokemon Card&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&ndash;&gt;
-      <div class="container">
-        <div class="row d-flex  justify-content-center m-auto">
-          <ng-container
-            *ngFor="let item of this.pokemon">
-            <div *ngIf="this.searchText === '' || item.name.includes(searchText) || item.typo.includes(selectedOption || searchText);"
-              class="card m-2 align-items-center justify-content-center bg-25 {{item.types[0].type.name}}"
-              style="width: 18rem;">
-              <div class="image-container">
-                <img src="{{item.sprites.other.home.front_default}}" class="card-img-top">
-              </div>
-              <div class="card-body titlePokemon">
-                <h5 class="card-title text-center">{{item.name}}</h5>
-              </div>
-              <div class="col-12 mt-3 info-pokemon">
-                <div class="row">
-                  <div class="col-6">
-                    <p>Pokemon Info</p>
-                  </div>
-                  <div class="col-6 text-end">
-                    <p>type <br>{{ item.types[0].type.name}} </p>
-                  </div>
-                </div>
-                &lt;!&ndash;-&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;Card Stats Section&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&ndash;&gt;
-                <table class="col-12 mb-3">
-                  <tr *ngFor="let item2 of item.stats">{{item2.stat.name|orderBy: key: reverse}}
-                    <td>
-                      {{item2.base_stat}}
-                    </td>
-                  </tr>
-                </table>
-              </div>
-            </div>
-          </ng-container>
-          <pagination-controls (pageChange)="config.currentPage = $event"></pagination-controls>
-        </div>
-      </div>
-      &lt;!&ndash;-&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;End Pokemon Card&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&ndash;&gt;
-    </div>
-  </div>
-</div>
--->
