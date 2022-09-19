@@ -8,5 +8,16 @@ body {
 }
 */
 body {
-  background-color: #FFF !important;
+  background-color: #f6bd60 !important;
+}
+/*Pagination Style*/
+li.current {
+  background-color: #e63946 !important;
+  color: white !important;
+}
+@media only screen and (max-width: 600px) {
+  body {
+    display: flex;
+    align-items: center;
+  }
 }
