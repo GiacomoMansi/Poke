@@ -5,8 +5,10 @@ Search Them All is like a Pokedex<br>
 In the search bar you can input a value like a Pokemon Name or his type<br>
 With the menu above you can search by a single type <br>
 And on the top menu on the left you can choose the language between Italian and English<br>
-There are also some bottoms to sort the Pokemon by their Name, Type, or Stats.
+There are also some bottoms to sort the Pokemon by their Name, Type, or Stats.<br>
 
+This app use PokéApi, All rights reserved to PokéApi<br>
+This is a simply project to imporove
 
 
 ## How to use it 
