@@ -8,7 +8,7 @@ And on the top menu on the left you can choose the language between Italian and 
 There are also some bottoms to sort the Pokemon by their Name, Type, or Stats.<br>
 
 This app use PokéApi, All rights reserved to PokéApi<br>
-This is a simply project to imporove
+This is a simply studing project
 
 
 ## How to use it 
