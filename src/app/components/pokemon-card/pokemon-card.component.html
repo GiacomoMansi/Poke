@@ -1,0 +1,33 @@
+<div class="row align-items-center justify-content-center mx-auto">
+  <ng-container *ngFor="let item of items">
+    <div class="card m-2 align-items-center justify-content-center bg-25 {{item.types[0].type.name}}"
+         style="width: 18rem;">
+      <div class="image-container">
+        <img src="{{item.sprites.other.home.front_default}}" class="card-img-top">
+      </div>
+      <div class="card-body titlePokemon">
+        <h5 class="card-title text-center">{{ item.name }}</h5>
+      </div>
+      <div class="col-12 mt-3 info-pokemon">
+        <div class="row">
+          <div class="col-6">
+            <p>Pokemon Info</p>
+          </div>
+          <div class="col-6 text-end">
+            <p>{{"typo" | translate}} <br>{{ item.types[0].type.name | translate}} </p>
+          </div>
+        </div>
+        <!-------------------------------------------Card Stats Section------------------------------------>
+
+        <table class="col-12 mb-3">
+          <tr *ngFor="let item2 of item.stats">{{item2.stat.name}}
+            <td>
+              {{item2.base_stat}}
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </ng-container>
+</div>
+
