@@ -1,5 +1,6 @@
-<div class="row align-items-center justify-content-center mx-auto">
-  <ng-container *ngFor="let item of items">
+<div class="row align-items-center justify-content-center mx-auto mt-5 border-fix">
+  <ng-container
+    *ngFor="let item of items|search: 'name,typo': _utilsService.searchText || _utilsService.selectedOption|orderBy: _utilsService.key: _utilsService.reverse|paginate: config;">
     <div class="card m-2 align-items-center justify-content-center bg-25 {{item.types[0].type.name}}"
          style="width: 18rem;">
       <div class="image-container">
