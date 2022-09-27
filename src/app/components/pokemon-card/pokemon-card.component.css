@@ -87,33 +87,10 @@
     background: #ea2222;
   }
 }
-label {
-  background-color: #e63946;
-  color: #fff;
-}
-.hero {
-  background-color: #e63946;
-}
 .btn {
   background-color: #e63946;;
   color: #fff;
 }
-h1 {
-  color: #fff;
-  font-family: tahoma;
-  font-size: 3rem;
-  font-weight: 100;
-  line-height: 1.5;
-  text-transform: uppercase;
-  white-space: nowrap;
-  overflow: hidden;
-  position: relative;
-  width: 550px;
-}
-.sort {
-  color: #fff;
-}
-
 
 img {
   width: 100px;
