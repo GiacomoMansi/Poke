@@ -10,6 +10,9 @@ import {NgxPaginationModule} from 'ngx-pagination';
 import {TranslateModule, TranslateLoader} from '@ngx-translate/core';
 import {OrderModule} from 'ngx-order-pipe';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+import { MainPageComponent } from './pages/main-page/main-page.component';
+import { SearchComponentComponent } from './components/search-component/search-component.component';
+import { PokemonCardComponent } from './components/pokemon-card/pokemon-card.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -20,6 +23,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     AppComponent,
     PokemonSearchComponent,
     SearchPipe,
+    MainPageComponent,
+    SearchComponentComponent,
+    PokemonCardComponent,
   ],
   imports: [
     BrowserModule,
