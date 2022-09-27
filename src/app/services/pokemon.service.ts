@@ -14,7 +14,7 @@ export class PokemonService {
   constructor(public http: HttpClient) { }
 
   async getPokemon() {
-    return await firstValueFrom(this.http.get("https://pokeapi.co/api/v2/pokemon/?offset=0&limit=599").pipe(
+    return await firstValueFrom(this.http.get("https://pokeapi.co/api/v2/pokemon/?offset=0&limit=3").pipe(
       catchError(this.handleError)
     ));
   }
