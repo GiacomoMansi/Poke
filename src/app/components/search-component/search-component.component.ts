@@ -1,4 +1,6 @@
 import {Component, EventEmitter, OnInit} from '@angular/core';
+import {PokemonService} from "../../services/pokemon.service";
+import {UtilsService} from "../../services/utils.service";
 
 @Component({
   selector: 'app-search-component',
@@ -28,27 +30,15 @@ export class SearchComponentComponent implements OnInit {
     {name: "dark", value: "dark"},
     {name: "fairy", value: "fairy"},
   ]
-  constructor() { }
+  constructor(public _pokemonService: PokemonService,
+              public _utilsService: UtilsService) { }
 
   ngOnInit() {
 
   }
-  //Input per la ricerca
-  searchText: string = "";
-  searchTextChanged: EventEmitter<string> = new EventEmitter<string>()
 
-  onSearchTextChanged() {
-    this.searchTextChanged.emit(this.searchText)
-  }
 
-  //Ordine alfabetico, tipo, statistiche
-  key = "";
-  reverse: boolean = false;
 
-  sort(key: any,) {
-    this.key = key
-    this.reverse = !this.reverse
-  }
 
   //Configurazione paginazione
   config = {

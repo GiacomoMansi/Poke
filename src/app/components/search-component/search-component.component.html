@@ -1,18 +1,16 @@
 <div class="row">
-  <div class="col-12 mt-5 ">
+  <div class="col-12 mt-5 border-fix ">
     <div class="col-lg-4 col-12 m-auto">
       <div class="hero">
-        <h1 class="m-md-1 text-center text-md-start">Search Them All!
-        </h1>
-
+        <h1 class="m-md-1 text-center text-md-start">Search Them All!</h1>
       </div>
-      <input class="form-control" type="text" name="search" [(ngModel)]="this.searchText"
+      <input class="form-control" type="text" name="search" [(ngModel)]="_utilsService.searchText"
              (click)="config.currentPage = 1" placeholder="{{'search_placeholder' | translate}}">
       <!--Click Event ritorna alla prima pagina-->
       <div class="input-group mb-3 mt-3">
         <label class="input-group-text" for="inputGroupSelect01">{{"pokemon_type_option" | translate}}</label>
         <select (click)="config.currentPage = 1" class="form-select" id="inputGroupSelect01"
-                [(ngModel)]="selectedOption">
+                [(ngModel)]="_utilsService.selectedOption">
           <option [value]="type.value" *ngFor="let type of this.options"
                   value="">{{type.name | translate}}</option>
         </select>
@@ -21,30 +19,30 @@
 
     <!-------------------------------------------Sorting------------------------------------>
     <div class="col-lg-8 col-12 flex-wrap m-auto d-flex justify-content-around"><p class="sort">{{"sort" | translate}}</p>
-      <button class="btn mb-1" (click)="sort('name')">{{'name' | translate}}
-        <i *ngIf="reverse" class="bi bi-sort-alpha-up"></i>
-        <i *ngIf="!reverse" class="bi bi-sort-alpha-down"></i></button>
-      <button class="btn mb-1" (click)="sort('typo')">{{"typo" | translate}}
-        <i *ngIf="reverse" class="bi bi-sort-alpha-up"></i>
-        <i *ngIf="!reverse" class="bi bi-sort-alpha-down"></i></button>
-      <button class="btn mb-1" (click)="sort('hp')">{{'hp' | translate}}
-        <i *ngIf="reverse" class="bi bi-sort-numeric-up"></i>
-        <i *ngIf="!reverse" class="bi bi-sort-numeric-down"></i></button>
-      <button class="btn mb-1" (click)="sort('attack')">{{'attack' | translate}}
-        <i *ngIf="reverse" class="bi bi-sort-numeric-up"></i>
-        <i *ngIf="!reverse" class="bi bi-sort-numeric-down"></i></button>
-      <button class="btn mb-1" (click)="sort('defense')">{{'defense' | translate}}
-        <i *ngIf="reverse" class="bi bi-sort-numeric-up"></i>
-        <i *ngIf="!reverse" class="bi bi-sort-numeric-down"></i></button>
-      <button class="btn mb-1" (click)="sort('specialAttack')">{{'special-attack' | translate}}
-        <i *ngIf="reverse" class="bi bi-sort-numeric-up"></i>
-        <i *ngIf="!reverse" class="bi bi-sort-numeric-down"></i></button>
-      <button class="btn mb-1" (click)="sort('specialDefense')">{{'special-defense' | translate}}
-        <i *ngIf="reverse" class="bi bi-sort-numeric-up"></i>
-        <i *ngIf="!reverse" class="bi bi-sort-numeric-down"></i></button>
-      <button class="btn mb-1" (click)="sort('speed')">{{'speed' | translate}}
-        <i *ngIf="reverse" class="bi bi-sort-numeric-up"></i>
-        <i *ngIf="!reverse" class="bi bi-sort-numeric-down"></i></button>
+      <button class="btn mb-1" (click)="_utilsService.sort('name')">{{'name' | translate}}
+        <i *ngIf="_utilsService.reverse" class="bi bi-sort-alpha-up"></i>
+        <i *ngIf="!_utilsService.reverse" class="bi bi-sort-alpha-down"></i></button>
+      <button class="btn mb-1" (click)="_utilsService.sort('typo')">{{"typo" | translate}}
+        <i *ngIf="_utilsService.reverse" class="bi bi-sort-alpha-up"></i>
+        <i *ngIf="!_utilsService.reverse" class="bi bi-sort-alpha-down"></i></button>
+      <button class="btn mb-1" (click)="_utilsService.sort('hp')">{{'hp' | translate}}
+        <i *ngIf="_utilsService.reverse" class="bi bi-sort-numeric-up"></i>
+        <i *ngIf="!_utilsService.reverse" class="bi bi-sort-numeric-down"></i></button>
+      <button class="btn mb-1" (click)="_utilsService.sort('attack')">{{'attack' | translate}}
+        <i *ngIf="_utilsService.reverse" class="bi bi-sort-numeric-up"></i>
+        <i *ngIf="!_utilsService.reverse" class="bi bi-sort-numeric-down"></i></button>
+      <button class="btn mb-1" (click)="_utilsService.sort('defense')">{{'defense' | translate}}
+        <i *ngIf="_utilsService.reverse" class="bi bi-sort-numeric-up"></i>
+        <i *ngIf="!_utilsService.reverse" class="bi bi-sort-numeric-down"></i></button>
+      <button class="btn mb-1" (click)="_utilsService.sort('specialAttack')">{{'special-attack' | translate}}
+        <i *ngIf="_utilsService.reverse" class="bi bi-sort-numeric-up"></i>
+        <i *ngIf="!_utilsService.reverse" class="bi bi-sort-numeric-down"></i></button>
+      <button class="btn mb-1" (click)="_utilsService.sort('specialDefense')">{{'special-defense' | translate}}
+        <i *ngIf="_utilsService.reverse" class="bi bi-sort-numeric-up"></i>
+        <i *ngIf="!_utilsService.reverse" class="bi bi-sort-numeric-down"></i></button>
+      <button class="btn mb-1" (click)="_utilsService.sort('speed')">{{'speed' | translate}}
+        <i *ngIf="_utilsService.reverse" class="bi bi-sort-numeric-up"></i>
+        <i *ngIf="!_utilsService.reverse" class="bi bi-sort-numeric-down"></i></button>
     </div>
   </div>
 </div>

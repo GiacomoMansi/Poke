@@ -1,13 +1,15 @@
 .hero {
   background-color: #e63946;
 }
+
 .btn {
   background-color: #e63946;;
   color: #fff;
 }
+
 h1 {
   color: #fff;
-  font-family: tahoma;
+  font-family: tahoma, serif;
   font-size: 3rem;
   font-weight: 100;
   line-height: 1.5;
@@ -17,6 +19,7 @@ h1 {
   position: relative;
   width: 550px;
 }
+
 .sort {
   color: #fff;
 }
