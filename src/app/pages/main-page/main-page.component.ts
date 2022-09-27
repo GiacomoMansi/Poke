@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {TranslateService} from "@ngx-translate/core";
 
 @Component({
@@ -8,10 +8,12 @@ import {TranslateService} from "@ngx-translate/core";
 })
 export class MainPageComponent implements OnInit {
 
-  constructor(public translateService: TranslateService) { }
+  constructor(public translateService: TranslateService) {
+  }
 
   ngOnInit() {
   }
+
   public selectLanguage(event: any) {
     this.translateService.use(event.target.value)
   }
