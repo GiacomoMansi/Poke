@@ -26,7 +26,7 @@ export class PokemonApi {
 })
 
 export class PokemonSearchComponent implements OnInit {
-  @Input() pokemonConfig: any;
+
 
   constructor(public pokemonService: PokemonService, public http: HttpClient,) {
   }
@@ -40,10 +40,7 @@ export class PokemonSearchComponent implements OnInit {
 
 
   async ngOnInit() {
-    this.pokemonConfig = {
-      name: name,
 
-    }
 
     this.pokemonApi = await <any>this.pokemonService.getPokemon()
       .catch(error => {

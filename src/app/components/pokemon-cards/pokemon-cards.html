@@ -1,60 +1,14 @@
-<div class="container container-xxl p-0">
-  <div class="row mx-auto">
-    <div class="container-body mx-auto">
-
-      <div class="container-fluid mt-5">
-        <div class="row align-items-center justify-content-center mx-auto">
-          <!-- <ng-container
-             *ngFor="let item of this.pokemon|search: 'name,typo': searchText || selectedOption|orderBy: key: reverse|paginate: config;">
-             <div class="card m-2 align-items-center justify-content-center bg-25 {{item.types[0].type.name}}"
-                  style="width: 18rem;">
-               <div class="image-container">
-                 <img src="{{item.sprites.other.home.front_default}}" class="card-img-top">
-               </div>
-               <div class="card-body titlePokemon">
-                 <h5 class="card-title text-center">{{item.name}}</h5>
-               </div>
-               <div class="col-12 mt-3 info-pokemon">
-                 <div class="row">
-                   <div class="col-6">
-                     <p>Pokemon Info</p>
-                   </div>
-                   <div class="col-6 text-end">
-                     <p>{{"typo" | translate}} <br>{{ item.types[0].type.name | translate}} </p>
-                   </div>
-                 </div>
-                 &lt;!&ndash;-&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;Card Stats Section&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&ndash;&gt;
-                 <table class="col-12 mb-3">
-                   <tr *ngFor="let item2 of item.stats">{{item2.stat.name|translate|orderBy: key: reverse}}
-                     <td>
-                       {{item2.base_stat}}
-                     </td>
-                   </tr>
-                 </table>
-               </div>
-             </div>
-           </ng-container>-->
-
-
-          <app-pokemon-card [items]="pokemon">
-          </app-pokemon-card>
-          <div class="col-12 d-flex justify-content-center mt-5">
-            <pagination-controls (pageChange)="config.currentPage = $event"></pagination-controls>
-          </div>
-          <!-------------------------------------------Spinner loading------------------------------------>
-          <div *ngIf="this.isLoading" class="spinner-border text-primary mt-5" role="status">
-            <span class="visually-hidden">Loading...</span>
-          </div>
-          <!-------------------------------------------Error Message------------------------------------>
-          <div *ngIf="this.errormessage" class="alert alert-warning text-center mt-5 mb-5" role="alert">
-            <h4>{{this.errormessage}}</h4>
-          </div>
-        </div>
-      </div>
-
-
-      <!-------------------------------------------End Pokemon Card------------------------------------>
-    </div>
-  </div>
+<app-pokemon-card [items]="pokemon" [config]="config">
+</app-pokemon-card>
+<div class="col-12 d-flex justify-content-center mt-5">
+  <pagination-controls (pageChange)="config.currentPage = $event"></pagination-controls>
+</div>
+<!-------------------------------------------Spinner loading------------------------------------>
+<div *ngIf="this.isLoading" class="spinner-border text-primary mt-5" role="status">
+  <span class="visually-hidden">Loading...</span>
+</div>
+<!-------------------------------------------Error Message------------------------------------>
+<div *ngIf="this.errormessage" class="alert alert-warning text-center mt-5 mb-5" role="alert">
+  <h4>{{this.errormessage}}</h4>
 </div>
 
