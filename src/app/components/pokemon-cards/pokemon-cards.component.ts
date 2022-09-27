@@ -41,7 +41,6 @@ export class PokemonSearchComponent implements OnInit {
 
   async ngOnInit() {
 
-
     this.pokemonApi = await <any>this.pokemonService.getPokemon()
       .catch(error => {
         return this.errormessage = error.message
@@ -68,22 +67,6 @@ export class PokemonSearchComponent implements OnInit {
     await pokemonCompleteList()
   }
 
-  //Input per la ricerca
-  searchText: string = "";
-  searchTextChanged: EventEmitter<string> = new EventEmitter<string>()
-
-  onSearchTextChanged() {
-    this.searchTextChanged.emit(this.searchText)
-  }
-
-  //Ordine alfabetico, tipo, statistiche
-  key = "";
-  reverse: boolean = false;
-
-  sort(key: any,) {
-    this.key = key
-    this.reverse = !this.reverse
-  }
 
   //Configurazione paginazione
   config = {
@@ -93,7 +76,4 @@ export class PokemonSearchComponent implements OnInit {
   };
 
 
-}
-
-export class items {
 }
