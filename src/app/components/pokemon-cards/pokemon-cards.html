@@ -4,11 +4,11 @@
   <pagination-controls (pageChange)="config.currentPage = $event"></pagination-controls>
 </div>
 <!-------------------------------------------Spinner loading------------------------------------>
-<div *ngIf="this.isLoading" class="spinner-border text-primary mt-5" role="status">
+<div *ngIf="isLoading" class="spinner-border text-primary mt-5" role="status">
   <span class="visually-hidden">Loading...</span>
 </div>
 <!-------------------------------------------Error Message------------------------------------>
-<div *ngIf="this.errormessage" class="alert alert-warning text-center mt-5 mb-5" role="alert">
-  <h4>{{this.errormessage}}</h4>
+<div *ngIf="errormessage" class="alert alert-warning text-center mt-5 mb-5" role="alert">
+  <h4>{{errormessage}}</h4>
 </div>
 
