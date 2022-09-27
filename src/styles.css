@@ -1,5 +1,5 @@
 @import "~bootstrap/dist/css/bootstrap.css";
-@import "~bootstrap-icons/font/bootstrap-icons.css";/* You can add global styles to this file, and also import other style files */
+@import "~bootstrap-icons/font/bootstrap-icons.css"; /* You can add global styles to this file, and also import other style files */
 /*
 body {
   background-image: url("/assets/images/pexels-pixabay-247676.jpg");
@@ -10,11 +10,17 @@ body {
 body {
   background-color: #f6bd60 !important;
 }
+
+.border-fix {
+  border: 1px solid red;
+}
+
 /*Pagination Style*/
 li.current {
   background-color: #e63946 !important;
   color: white !important;
 }
+
 @media only screen and (max-width: 600px) {
   body {
     display: flex;
