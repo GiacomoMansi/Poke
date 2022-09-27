@@ -1,7 +1,7 @@
-import {Component, EventEmitter, OnInit,} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit,} from '@angular/core';
 import {PokemonService} from "../../services/pokemon.service";
 import {HttpClient} from "@angular/common/http";
-import {TranslateService} from "@ngx-translate/core";
+
 import {firstValueFrom} from "rxjs";
 
 export interface Pokemon {
@@ -26,7 +26,9 @@ export class PokemonApi {
 })
 
 export class PokemonSearchComponent implements OnInit {
-  constructor(public pokemonService: PokemonService, public http: HttpClient, private translateService: TranslateService) {
+  @Input() pokemonConfig: any;
+
+  constructor(public pokemonService: PokemonService, public http: HttpClient,) {
   }
 
   public pokemonApi = PokemonApi; // Array contenente la chiamata all'api
@@ -35,32 +37,14 @@ export class PokemonSearchComponent implements OnInit {
   public selectedOption: string = ""
   public errormessage: string = "";
   public isLoading: boolean = true
-  public options = [
-    {name: "all", value: ""},
-    {name: "grass", value: "grass"},
-    {name: "normal", value: "normal"},
-    {name: "fighting", value: "fighting"},
-    {name: "poison", value: "poison"},
-    {name: "ground", value: "ground"},
-    {name: "rock", value: "rock"},
-    {name: "bug", value: "bug"},
-    {name: "ghost", value: "ghost"},
-    {name: "steel", value: "steel"},
-    {name: "fire", value: "fire"},
-    {name: "water", value: "water"},
-    {name: "electric", value: "electric"},
-    {name: "psychic", value: "psychic"},
-    {name: "ice", value: "ice"},
-    {name: "dragon", value: "dragon"},
-    {name: "dark", value: "dark"},
-    {name: "fairy", value: "fairy"},
-  ]
 
-  public selectLanguage(event: any) {
-    this.translateService.use(event.target.value)
-  }
 
   async ngOnInit() {
+    this.pokemonConfig = {
+      name: name,
+
+    }
+
     this.pokemonApi = await <any>this.pokemonService.getPokemon()
       .catch(error => {
         return this.errormessage = error.message
@@ -114,3 +98,5 @@ export class PokemonSearchComponent implements OnInit {
 
 }
 
+export class items {
+}
