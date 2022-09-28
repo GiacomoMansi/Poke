@@ -1,5 +1,5 @@
-import {Component, EventEmitter, OnInit} from '@angular/core';
-import {PokemonService} from "../../services/pokemon.service";
+import {Component, OnInit} from '@angular/core';
+
 import {UtilsService} from "../../services/utils.service";
 
 @Component({
@@ -30,8 +30,7 @@ export class SearchComponentComponent implements OnInit {
     {name: "dark", value: "dark"},
     {name: "fairy", value: "fairy"},
   ]
-  constructor(public _pokemonService: PokemonService,
-              public _utilsService: UtilsService) { }
+  constructor(public _utilsService: UtilsService) { }
 
   ngOnInit() {
 
