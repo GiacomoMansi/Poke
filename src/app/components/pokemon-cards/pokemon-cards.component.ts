@@ -68,7 +68,6 @@ export class PokemonSearchComponent implements OnInit {
           )
         }
         this.isLoading = false;
-        console.log(this.pokemon)
         pokemonCompleteList()
       },
       error: (err) => { //Gestisco gli errori del subscribe
