@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 
 import {UtilsService} from "../../services/utils.service";
+import {PokemonService} from "../../services/pokemon.service";
 
 @Component({
   selector: 'app-search-component',
@@ -9,7 +10,7 @@ import {UtilsService} from "../../services/utils.service";
 })
 export class SearchComponentComponent implements OnInit {
 
-  public selectedOption: string = ""
+
   public options = [
     {name: "all", value: ""},
     {name: "grass", value: "grass"},
@@ -30,12 +31,11 @@ export class SearchComponentComponent implements OnInit {
     {name: "dark", value: "dark"},
     {name: "fairy", value: "fairy"},
   ]
-  constructor(public _utilsService: UtilsService) { }
+  constructor(public _utilsService: UtilsService, public _pokemonService: PokemonService) { }
 
   ngOnInit() {
 
   }
-
 
 
 

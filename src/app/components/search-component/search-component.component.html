@@ -4,14 +4,14 @@
       <div class="hero">
         <h1 class="m-md-1 text-center text-md-start">Search Them All!</h1>
       </div>
-      <input class="form-control" type="text" name="search" [(ngModel)]="_utilsService.searchText"
+      <input (keyup)='_pokemonService.filterList()' class="form-control" type="text" name="search" [(ngModel)]="_utilsService.searchText"
              (click)="config.currentPage = 1" placeholder="{{'search_placeholder' | translate}}">
       <!--Click Event ritorna alla prima pagina-->
       <div class="input-group mb-3 mt-3">
         <label class="input-group-text" for="inputGroupSelect01">{{"pokemon_type_option" | translate}}</label>
-        <select (click)="config.currentPage = 1" class="form-select" id="inputGroupSelect01"
+        <select (change)="_pokemonService.filterList()" class="form-select" id="inputGroupSelect01"
                 [(ngModel)]="_utilsService.selectedOption">
-          <option [value]="type.value" *ngFor="let type of this.options"
+          <option  [value]="type.value" *ngFor="let type of this.options"
                   value="">{{type.name | translate}}</option>
         </select>
       </div>
