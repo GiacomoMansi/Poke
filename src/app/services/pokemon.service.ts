@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {firstValueFrom} from "rxjs";
+import {concatMap, firstValueFrom} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 import {UtilsService} from "./utils.service";
 
@@ -19,19 +19,19 @@ export class PokemonService {
   }
 
   async getPokemon() { //To Promise invertito in subscribe
-    this._httpClient.get("https://pokeapi.co/api/v2/pokemon/?offset=0&limit=500").subscribe({
+    this._httpClient.get("https://pokeapi.co/api/v2/pokemon/?offset=0&limit=100").subscribe({
       next: (result: any,) => {
         this.pokemonApi = result.results
         const pokemonCompleteList = async (): Promise<any> => {
-          await Promise.all(
-            this.pokemonApi.map(async (pokemon: any): Promise<any> => {
-              this.onePokemon = await firstValueFrom(this._httpClient.get(`https://pokeapi.co/api/v2/pokemon/${pokemon.name}`))
-                .catch(err =>
-                  this.errormessage = err.message)//Gestisco gli errori
-              this.pokemon.push(this.onePokemon) //Inserisco il singolo pokemon nell'array pokemon
-            })
-          )
-        }
+                  await concatMap( //promise all eliminato al suo posto concatMap, studiati anche mergeMap, merge
+                    this.pokemonApi.map(async (pokemon: any): Promise<any> => {
+                      this.onePokemon = await firstValueFrom(this._httpClient.get(`https://pokeapi.co/api/v2/pokemon/${pokemon.name}`))
+                        .catch(err =>
+                          this.errormessage = err.message)//Gestisco gli errori
+                      this.pokemon.push(this.onePokemon) //Inserisco il singolo pokemon nell'array pokemon
+                    })
+                  )
+                }
         this.isLoading = false;
          pokemonCompleteList()
 
