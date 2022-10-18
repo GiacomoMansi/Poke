@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {firstValueFrom} from "rxjs";
 import {HttpClient} from "@angular/common/http";
+import {UtilsService} from "./utils.service";
 
 @Injectable({
   providedIn: 'root'
@@ -12,8 +13,9 @@ export class PokemonService {
   public selectedOption: string = ""
   public errormessage: string = "";
   public isLoading: boolean = true
+  public items: any
+  constructor(public _httpClient: HttpClient, public _utilsService: UtilsService) {
 
-  constructor(public _httpClient: HttpClient) {
   }
 
   async getPokemon() { //To Promise invertito in subscribe
@@ -27,30 +29,12 @@ export class PokemonService {
                 .catch(err =>
                   this.errormessage = err.message)//Gestisco gli errori
               this.pokemon.push(this.onePokemon) //Inserisco il singolo pokemon nell'array pokemon
-
-              //Assegno le statistiche all'oggetto onePokemon eliminati gli object assign
-              this.onePokemon = {
-                hp: this.onePokemon.stats[0].base_stat,
-                attack: this.onePokemon.stats[1].base_stat,
-                defense: this.onePokemon.stats[2].base_stat,
-                specialAttack: this.onePokemon.stats[3].base_stat,
-                specialDefense: this.onePokemon.stats[4].base_stat,
-                speed: this.onePokemon.stats[5].base_stat,
-                typo: this.onePokemon.types[0].type.name,
-              }
-              /*Object.assign(this.onePokemon, {hp: this.onePokemon.stats[0].base_stat})
-              Object.assign(this.onePokemon, {attack: this.onePokemon.stats[1].base_stat})
-              Object.assign(this.onePokemon, {defense: this.onePokemon.stats[2].base_stat})
-              Object.assign(this.onePokemon, {specialAttack: this.onePokemon.stats[3].base_stat})
-              Object.assign(this.onePokemon, {specialDefense: this.onePokemon.stats[4].base_stat})
-              Object.assign(this.onePokemon, {speed: this.onePokemon.stats[5].base_stat})
-              //Assegno il tipo di pokemon all'oggetto onePokemon
-              Object.assign(this.onePokemon, {typo: this.onePokemon.types[0].type.name})*/
             })
           )
         }
         this.isLoading = false;
-        pokemonCompleteList()
+         pokemonCompleteList()
+
       },
       error: (err) => { //Gestisco gli errori del subscribe
         console.error(err.message)
@@ -59,5 +43,18 @@ export class PokemonService {
       complete: () => {
       }
     })
+  }
+
+  //Tolto il search pipe insertia una funzione apposita che filtra sia per nome che per tipo
+  async filterList() {
+    this.items = this.pokemon;
+
+    const keywords: string = this._utilsService.searchText.trim().toLowerCase();
+    const selectType: string = this._utilsService.selectedOption.trim().toLowerCase()
+
+    if (keywords.length > 0 || selectType.length > 0) {
+      this.items = this.items.filter((item: any) => item.name.toLowerCase().includes(keywords) && item.types[0].type.name.toLowerCase().includes(selectType))
+    }
+    return this.items;
   }
 }
