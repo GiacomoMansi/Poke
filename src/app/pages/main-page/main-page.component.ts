@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {TranslateService} from "@ngx-translate/core";
+import {PokemonService} from "../../services/pokemon.service";
 
 @Component({
   selector: 'app-main-page',
@@ -8,12 +9,16 @@ import {TranslateService} from "@ngx-translate/core";
 })
 export class MainPageComponent implements OnInit {
 
-  constructor(public translateService: TranslateService) {
+  constructor(public translateService: TranslateService, public _pokemonService: PokemonService) {
   }
 
-  ngOnInit() {
+  async ngOnInit() {
+    await this._pokemonService.getPokemon()
+    await this._pokemonService.filterList()
   }
-
+  getPokemon() {
+    return this._pokemonService.getPokemon()
+  }
   public selectLanguage(event: any) {
     this.translateService.use(event.target.value)
   }
