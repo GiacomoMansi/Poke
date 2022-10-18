@@ -42,7 +42,7 @@ export class PokemonSearchComponent implements OnInit {
 
 
   async ngOnInit() {
-    await this._pokemonService.getPokemon()
+    await this._pokemonService.getPokemon()//Chiamo la funzione che è nel service per caricare i pokemon
   }
 
   // async getPokemon() { //To Promise invertito in subscribe
