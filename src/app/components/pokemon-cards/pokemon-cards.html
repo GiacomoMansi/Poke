@@ -1,4 +1,4 @@
-<app-pokemon-card [items]="pokemon" [config]="config">
+<app-pokemon-card [items]="this._pokemonService.pokemon" [config]="config">
 </app-pokemon-card>
 <div class="col-12 d-flex justify-content-center mt-5">
   <pagination-controls (pageChange)="config.currentPage = $event"></pagination-controls>
