@@ -21,10 +21,6 @@ export class PokemonService {
   constructor(public _httpClient: HttpClient, public _utilsService: UtilsService) {
   }
 
-  /*Mi scuso per non aver capito bene le ultime istruzioni, ahime uso molto le promise, sicuramente mi eserciterò molto
-  di più per usare gli observable, grazie mille per i consigli, il ts-ignore purtroppo ho provato a corrgere l'errore che
-  mi resituisce webStorm, ho anche cercato su stackOverFlow ma senza riuscire nel risolverlo, ancora grazie di tutto,
-  attento una vostra correnzione :) */
   async getPokemon() {
     return this._httpClient.get("https://pokeapi.co/api/v2/pokemon/?offset=0&limit=100")
       .pipe(filter((data: any) => Boolean(data)),
