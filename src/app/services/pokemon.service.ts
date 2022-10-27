@@ -1,7 +1,11 @@
 import {Injectable} from '@angular/core';
-import {concatMap, firstValueFrom} from "rxjs";
+import { filter, map, mergeAll, mergeMap} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 import {UtilsService} from "./utils.service";
+
+class PokemonSearch {
+  results: any
+}
 
 @Injectable({
   providedIn: 'root'
@@ -15,39 +19,29 @@ export class PokemonService {
   public isLoading: boolean = true
   public items: any
   constructor(public _httpClient: HttpClient, public _utilsService: UtilsService) {
-
   }
 
-  async getPokemon() { //To Promise invertito in subscribe
-    this._httpClient.get("https://pokeapi.co/api/v2/pokemon/?offset=0&limit=100").subscribe({
-      next: (result: any,) => {
-        this.pokemonApi = result.results
-        const pokemonCompleteList = async (): Promise<any> => {
-                  await concatMap( //promise all eliminato al suo posto concatMap, studiati anche mergeMap, merge
-                    this.pokemonApi.map(async (pokemon: any): Promise<any> => {
-                      this.onePokemon = await firstValueFrom(this._httpClient.get(`https://pokeapi.co/api/v2/pokemon/${pokemon.name}`))
-                        .catch(err =>
-                          this.errormessage = err.message)//Gestisco gli errori
-                      this.pokemon.push(this.onePokemon) //Inserisco il singolo pokemon nell'array pokemon
-                    })
-                  )
-                }
-        this.isLoading = false;
-         pokemonCompleteList()
-
-      },
-      error: (err) => { //Gestisco gli errori del subscribe
-        console.error(err.message)
-        this.errormessage = err.message
-      },
-      complete: () => {
-      }
+  async getPokemon() {
+    return this._httpClient.get("https://pokeapi.co/api/v2/pokemon/?offset=0&limit=100")
+      .pipe(filter((data: any) => Boolean(data)),
+      map((searchData:PokemonSearch ) => searchData.results),
+        // @ts-ignore
+      mergeMap(dataResults => {
+        return dataResults.map((res: { name: any; }) => {
+          return this._httpClient.get(`https://pokeapi.co/api/v2/pokemon/${res.name}`)
+        })
+      }),
+        mergeAll()
+      )
+    .subscribe((response: any) => {
+       this.onePokemon = response
+        this.pokemon.push(this.onePokemon)
     })
   }
 
   //Tolto il search pipe insertia una funzione apposita che filtra sia per nome che per tipo
-  async filterList() {
-    this.items = this.pokemon;
+   filterList() {
+    this.items =  this.pokemon;
 
     const keywords: string = this._utilsService.searchText.trim().toLowerCase();
     const selectType: string = this._utilsService.selectedOption.trim().toLowerCase()
